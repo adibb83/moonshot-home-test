@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "playcodeTemplate": {
+    "moonshot": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/playcodeTemplate",
+            "outputPath": "dist/moonshot",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,10 +25,13 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/web.config",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles/theme/app-theme.scss",
+              "src/assets/styles/main/main.scss"
             ],
             "scripts": []
           },
@@ -60,25 +63,27 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "playcodeTemplate:build"
+            "browserTarget": "moonshot:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "playcodeTemplate:build:production"
+              "browserTarget": "moonshot:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "playcodeTemplate:build"
+            "browserTarget": "moonshot:build"
           }
         },
         "test": {
@@ -90,10 +95,11 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles/main/main.scss"
             ],
             "scripts": []
           }
@@ -115,15 +121,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "playcodeTemplate:serve"
+            "devServerTarget": "moonshot:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "playcodeTemplate:serve:production"
+              "devServerTarget": "moonshot:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "playcodeTemplate"
+  "defaultProject": "moonshot"
 }

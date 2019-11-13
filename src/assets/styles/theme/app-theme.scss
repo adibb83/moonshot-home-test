@@ -1,0 +1,320 @@
+ @import 'palettes';
+ @import '../main/variables';
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@import '~@angular/material/theming';
+ // Plus imports for other components in your app
+ // Include the common styles for Angular Material. We include this here so that you only
+ // have to load a single css file for Angular Material in your app.
+ // Be sure that you only ever include this mixin once!
+ @include mat-core();
+ // Define the palettes for your theme using the Material Design palettes available in palette.scss
+ // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+ // hue. Available color palettes: https://material.io/design/color/
+ 
+// Copy the palettes from your selected theme (usually theme.scss).
+
+
+ $moonshot-primary: mat-palette($app-primary);
+ $moonshot-accent:  mat-palette($app-accent);
+ // The warn palette is optional (defaults to red).
+ $moonshot-warn: mat-palette($moonshot-red);
+ // Create the theme object (a Sass map containing all of the palettes).
+ $moonshot-theme: mat-light-theme($moonshot-primary, $moonshot-accent, $moonshot-warn);
+ // Include theme styles for core and each component used in your app.
+ // Alternatively, you can import and @include the theme mixins for each component
+ // that you are using.
+ @include angular-material-theme($moonshot-theme);
+
+
+
+
+
+
+
+
+ 
+
+// @import '~@angular/material/theming';
+// @include mat-core();
+// // $primary: mat-palette($over-ai-pink, 500);
+// // $accent: mat-palette($mat-red, A200, A100, A400);
+// // $warn: mat-palette($mat-orange);
+// $primary: mat-palette($over-ai-pink, 500);
+// $accent: mat-palette($mat-red, A200, A100, A400);
+// $warn: mat-palette($mat-orange);
+// $theme: mat-light-theme($primary, $accent, $warn);
+// @include angular-material-theme($theme);
+// // Define a custom typography config that overrides the font-family as well as the
+// // `headlines` and `body-1` levels.
+// $custom-typography: mat-typography-config( 
+//   $font-family: $font-main, 
+//   $headline: mat-typography-level(4.8rem, 1.5, bold), 
+//   $title: mat-typography-level(3.6rem, 1.5, bold), 
+//   $subheading-2: mat-typography-level(2.4rem, 1.5, bold), 
+//   $subheading-1: mat-typography-level(1.8rem, 1.5, bold), 
+//   $body-1: mat-typography-level(1.6rem, 1.5, normal), 
+//   $body-2: mat-typography-level(1.6rem, 1.5, bold), 
+//   $caption: mat-typography-level(1.3rem, 1.5, normal), 
+//   $button: mat-typography-level(1.6rem, inherit, bold)
+//   );
+// @include angular-material-typography($custom-typography);
+// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// // CUSTOMIZE
+// ////////////////////////////////////
+// // h1{font-size:mat-font-size($custom-typography, headline);}
+// [mat-button],
+// [mat-raised-button] {
+//   // font-weight: bold !important;
+//   text-transform: uppercase;
+//   &[block] {
+//     width: 100%;
+//     display: block;
+//   }
+// }
+
+// .mat-body p,
+// .mat-body-1 p,
+// .mat-typography p {
+//   margin: 0;
+// }
+
+// mat-list-item.active {
+//   >.mat-list-item-content {
+//     background-color: $hermesAccent !important;
+//     color: $hermesAccentContrast !important;
+//     >.mat-list-text>span {
+//       // font-weight: bold;
+//     }
+//   }
+// }
+
+// .mat-list,
+// .mat-nav-list {
+//   margin-bottom: 8px;
+//   &[dense] {
+//     margin-bottom: 4px;
+//   }
+// }
+
+// .mat-list .mat-subheader,
+// .mat-nav-list .mat-subheader {
+//   font-size: 1.2rem !important; // font-weight: inherit !important;
+// }
+
+// mat-tab-group,
+// .mat-tab-body-wrapper,
+// .mat-tab-header,
+// .mat-tab-label {
+//   font-size: inherit !important;
+//   font-family: inherit !important;
+// }
+
+// .mat-toolbar {
+//   padding: 0 $gutterSize !important; // font-weight: inherit !important;
+//   &[color="none"] {
+//     background: inherit !important;
+//     color: inherit !important;
+//   } 
+//   &{
+//     font-size: 2.4rem;
+//     line-height: 6.4rem; 
+//   }
+// }
+
+// mat-list a[mat-list-item] .mat-list-item,
+// mat-list mat-list-item .mat-list-item,
+// mat-nav-list a[mat-list-item] .mat-list-item,
+// mat-nav-list mat-list-item .mat-list-item {
+//   font-family: inherit !important;
+// }
+// mat-list[dense] a[mat-list-item] .mat-list-item,
+// mat-list[dense] mat-list-item .mat-list-item,
+// mat-nav-list[dense] a[mat-list-item] .mat-list-item,
+// mat-nav-list[dense] mat-list-item .mat-list-item {
+//   font-family: inherit !important;
+// }
+// .mat-list .mat-list-item,
+// .mat-nav-list .mat-list-item {
+//   color: inherit !important;
+//   font-size: inherit;
+// }
+
+// .mat-list .mat-list-item .mat-list-item-content,
+// .mat-nav-list .mat-list-item .mat-list-item-content {
+//   font-family: inherit !important;
+//   height: auto !important;
+//   min-height: 48px !important;
+//   font-size: inherit !important;
+// }
+
+// // .mat-dialog-container {
+// //   box-shadow: initial !important;
+// //   padding: initial !important;
+// //   background: initial;
+// // }
+// .mat-card {
+//   font-family: inherit !important;
+//   .mat-card-title {
+//     font-size: 2.4rem !important; // font-weight: inherit !important;
+//   }
+//   .mat-card-actions {
+//     text-align: end;
+//   }
+//   .mat-card-content,
+//   .mat-card-header .mat-card-title,
+//   .mat-card-subtitle {
+//     font-size: inherit !important;
+//   }
+// }
+
+// .mat-dialog-actions {
+//   justify-content: flex-end;
+//   >button:not(:last-child) {
+//     margin-right: 1rem;
+//   }
+// }
+
+// // .mat-button,
+// // .mat-fab,
+// // .mat-icon-button,
+// // .mat-mini-fab,
+// // .mat-raised-button {
+// //   font-size: 1.6rem !important;
+// //   font-family: inherit !important;
+// // }
+// .mat-fab,
+// .mat-mini-fab,
+// .mat-raised-button {
+//   box-shadow: none !important;
+// }
+
+// a {
+//   &.mat-button,
+//   &.mat-icon-button,
+//   &.mat-raised-button {
+//     color: map-get($mat-blue, A700) !important;
+//   }
+// }
+
+// .mat-button,
+// .mat-raised-button {
+//   border-radius: 0px !important;
+// }
+
+// .mat-menu-item {
+//   height: 40px;
+//   line-height: 40;
+//   font-size: 1.6rem !important;
+//   font-family: inherit !important;
+// }
+
+// .mat-input-container {
+//   font: inherit !important;
+//   .mat-input-element {
+//     padding: .3rem 0;
+//   }
+//   .mat-input-underline {
+//     margin-top: 0 !important;
+//   }
+//   &.humble {
+//     .mat-input-underline {
+//       border-color: transparent;
+//     }
+//   }
+//   .mat-input-placeholder {
+//     color: map-get($mat-grey, 400);
+//     &.mat-focused {
+//       color: map-get($mat-grey, 600);
+//     }
+//   }
+//   .mat-input-placeholder,
+//   .mat-input-placeholder-wrapper {
+//     padding-top: 0;
+//   }
+//   .mat-input-placeholder-wrapper {
+//     top: .3rem;
+//   }
+// }
+
+// .mat-chip:not(.mat-basic-chip) {
+//   font-size: inherit !important;
+//   border-radius: 0 !important;
+// }
+
+// .mat-grid-list.start .mat-figure {
+//   justify-content: left !important;
+// }
+
+// .mat-tooltip {
+//   font-size: 1.2rem !important;
+// }
+
+// // EXTEND
+// ////////////////////////////////////
+// mat-list {
+//   &[bordered] {
+//     >mat-list-item {
+//       border: 1px solid $dividerColor;
+//       &:not(:last-child) {
+//         border-bottom-width: 0;
+//       }
+//     }
+//   }
+//   &[expressions] {
+//     >mat-list-item {
+//       >.mat-list-item-content {
+//         padding: 0 !important;
+//         position: static !important;
+//       }
+//     }
+//   }
+//   mat-list-item {
+//     .controls {
+//       color: $actionsColor;
+//     }
+//     &:not(:hover) {
+//       .controls {
+//         opacity: 0;
+//       }
+//     }
+//   }
+//   &[mini] {
+//     padding: 0;
+//     margin: 0;
+//     .mat-list-item .mat-list-item-content {
+//       min-height: 3.2rem !important;
+//       padding: 0 !important;
+//       .mat-list-text:last-child {
+//         padding-right: 0;
+//       }
+//       input {
+//         line-height: 3.2rem;
+//       }
+//       >.mat-list-avatar,
+//       >.mat-list-avatar {
+//         width: 3.2rem !important;
+//         height: 3.2rem !important;
+//         line-height: 3.2rem !important;
+//         text-align: center;
+//         border-radius: initial;
+//         background-color: map-get($mat-grey, 100);
+//       }
+//     }
+//   }
+// }
+
+// .mat-input-wrapper {
+//   margin: 0 !important;
+//   padding: 0 !important;
+// }
+
+// .mat-list-item[divider] {
+//   >.mat-list-item-content {
+//     min-height: 2px !important;
+//   }
+// }
+
+// // customize elements to inherit font family
+// .mat-list-item {
+//   font-family: inherit !important;
+// }

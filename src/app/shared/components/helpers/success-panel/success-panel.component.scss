@@ -1,0 +1,15 @@
+@import '../../../../../assets/styles/theme/palettes';
+mat-card {
+  background: map-get($moonshot-blue, A700);
+  color: map-get(map-get($moonshot-blue, contrast), A700);
+  animation: fadeInUp .5s alternate;
+}
+
+mat-icon {
+  text-align: center;
+  line-height: 1.9;
+}
+
+.material-icons {
+  font-size: 1.3rem;
+}

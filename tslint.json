@@ -18,9 +18,16 @@
     "component-selector": [
       true,
       "element",
-      "app",
       "kebab-case"
     ],
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    },
     "import-blacklist": [
       true,
       "rxjs/Rx"
@@ -29,7 +36,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      200
     ],
     "member-access": false,
     "member-ordering": [
