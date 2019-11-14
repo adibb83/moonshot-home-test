@@ -1,99 +1,64 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient} from '@angular/common/http';
-import { HttpExtendedService } from './http-extended.service';
 import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { apiUrl } from '../globals';
+import { AccountLoginModel } from '@models/account-login.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { User, UserInfo } from 'firebase/app';
 
-import { AccountRegisterModel } from '../models/account-register.model';
-import { AccountLoginModel } from '../models/account-login.model';
-
-import { HeadersService } from './headers.service';
+import UserCredential = firebase.auth.UserCredential;
+export const googleAuthProvider = new auth.GoogleAuthProvider();
+export enum AuthProvider {
+    EmailAndPassword = 'firebase',
+    Google = 'google',
+  }
 
 @Injectable()
 export class AccountService {
-    private url = apiUrl;
-    public details: object;
-    // public claims: Object;
-    public isAdmin: boolean;
+    user$: Observable<User>;
+    user: User;
 
     constructor(
-        private _http: HttpClient,
-        private _headersService: HeadersService
+        private _afAuth: AngularFireAuth
     ) { }
 
-    confirm(userId: string, code: string): Observable<AccountRegisterModel[]> {
-        const url = `${this.url}api/Account/ConfirmEmail?userId=${userId}&code=${code}`;
-        // let bodyString = JSON.stringify(body); // Stringify payload
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        // tslint:disable-next-line:object-literal-shorthand
-        const options = { headers: headers}; // Create a request option
-        return this._http.get<AccountRegisterModel[]>(url, options).pipe(
-            map(res => res),
-            // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-            ((error: any) => Observable.throw(error.json() || { Message: 'Server error' })));
-    }
 
-    register(body: object): Observable<AccountRegisterModel[]> {
+    public async signInWith(provider: AuthProvider, credentials?: AccountLoginModel) {
+        try {
+          let signInResult: UserCredential | any;
+          switch (provider) {
+            case AuthProvider.EmailAndPassword:
+              signInResult = await this._afAuth.auth.signInWithEmailAndPassword(credentials.Email, credentials.Password) as UserCredential;
+              break;
+            case AuthProvider.Google:
+              signInResult = await this._afAuth.auth.signInWithPopup(googleAuthProvider) as UserCredential;
+              break;
+            default:
+              throw new Error(`${AuthProvider[provider]} is not available as auth provider`);
+          }
+          await this.handleSuccess(signInResult);
+        } catch (err) {
+          this.handleError(err);
+        }
+      }
 
-        const url = this.url + 'api/Account/Register';
+      async handleSuccess(userCredential: UserCredential) {
+        // this.onSuccessEmitter.next(userCredential.user);
+        // if (this.config.enableFirestoreSync) {
+        //   try {
+        //     await this._fireStoreService.updateUserData(this.parseUserInfo(userCredential.user));
+        //   } catch (e) {
+        //     console.error(`Error occurred while updating user data with firestore: ${e}`);
+        //   }
+        // }
+        // if (this.config.toastMessageOnAuthSuccess) {
+        //   const fallbackMessage = `Hello ${userCredential.user.displayName ? userCredential.user.displayName : ''}!`;
+        //   this.showToast(this.messageOnAuthSuccess || fallbackMessage);
+        // }
+        console.log(userCredential);
+      }
 
-        // let bodyString = JSON.stringify(body); // Stringify payload
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        const options = { headers }; // Create a request option
-
-        return this._http.post(url, body, options).pipe(
-            map(res => res),
-            // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-            (error: any) => Observable.throw(error.json() || { Message: 'Server error' }));
-    }
-
-    login(obj: AccountLoginModel): Observable<AccountLoginModel[]> {
-
-        const url: string = this.url + 'Token';
-
-        const bodyString = `grant_type=password&username=${obj.Email}&password=${obj.Password}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); // ... Set content type to JSON
-        const options = { headers }; // Create a request option
-
-        return this._http.post<AccountLoginModel[]>(url, bodyString, options).pipe(
-            map(res => res),
-            // .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-            (error: any) => Observable.throw(error.json() || { Message: 'Server error' }));
-    }
-
-    sendPassword(obj: any) {
-        const bodyString = `Email=${obj.Email}&RedirectUrl=${obj.RedirectUrl}`;
-        const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }); // ... Set content type to JSON
-        const options = { headers }; // Create a request option
-        return this._http.post(`${this.url}api/account/SendForgotPasswordEmail`, bodyString, options)
-        .pipe(
-            map(res => res),
-           (error: any) => Observable.throw(error || { Message: 'Server error' }));
-    }
-
-    resetPassword(obj: any) {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
-        const options = { headers }; // Create a request option
-        return this._http.post(`${this.url}api/account/ResetPassword`, obj, options)
-        .pipe(
-            map(res => res),
-            (error: any) => Observable.throw(error.json() || { Message: 'Server error' }));
-    }
-
-    getDetails() {
-        return this._http.get(`${this.url}api/account`, this._headersService.get())
-        .pipe(
-            map(res => res),
-            (error: any) => Observable.throw(error.json() || { Message: 'Server error' }));
-    }
-
-    getClaims() {
-        return this._http.get(`${this.url}api/account/claims`, this._headersService.get())
-        .pipe(
-            map(res => res),
-            (error: any) => Observable.throw(error.json() || { Message: 'Server error' }));
-    }
-
+      handleError(error: any) {
+        console.error(error);
+      }
 }
 

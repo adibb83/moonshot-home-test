@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CampaignModel, SegmentModel, TargetingModel } from '@models/campaign.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as _ from 'lodash';
 
 @Injectable({

@@ -8,12 +8,20 @@ import { CampaignStepperComponent } from './components/campaign-stepper/campaign
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 // forms modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TargetingFormComponent } from './components/targeting-form/targeting-form.component';
+import { SegmentFormComponent } from './components/segment-form/segment-form.component';
+import { SummeryComponent } from './components/summery/summery.component';
 
 @NgModule({
-  declarations: [CampaignStepperComponent],
+  declarations: [
+    CampaignStepperComponent,
+    TargetingFormComponent,
+    SegmentFormComponent,
+    SummeryComponent],
   imports: [
     CommonModule,
     CampaignCreatorRoutingModule,
@@ -21,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatStepperModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: []
 })

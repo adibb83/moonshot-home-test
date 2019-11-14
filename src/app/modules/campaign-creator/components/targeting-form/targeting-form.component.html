@@ -1,0 +1,28 @@
+<form [formGroup]="targetingForm">
+  <mat-form-field>
+    <input matInput type="text" placeholder="Campaign Name" [formControl]="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" placeholder="Daily budget" [formControl]="budget">
+    <span matPrefix>$&nbsp;</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" placeholder="'Bid(Max CPC)''" [formControl]="bid">
+    <span matPrefix>$&nbsp;</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="startPicker" [max]="endPicker.value" placeholder="Start Date" [formControl]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="endPicker" [min]="startPicker" placeholder="End Date" [formControl]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+
+</form>
