@@ -3,8 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/authentication', pathMatch: 'full' },
-  { path: 'authentication', loadChildren: () => import(`@modules/Authentication/authentication-routing.module`).then(m => m.AuthenticationRoutingModule) },
+  { path: '',   redirectTo: '/campaign-creator', pathMatch: 'full' },
+  { path: 'authentication',
+  loadChildren: () => import('@modules/Authentication/authentication-routing.module')
+  .then(m => m.AuthenticationRoutingModule)
+},
+{ path: 'campaign-creator',
+  loadChildren: () => import('@modules/campaign-creator/campaign-creator.module')
+  .then(m => m.CampaignCreatorModule)
+},
+{ path: 'campaign-manager',
+  loadChildren: () => import('@modules/campaign-manager/campaign-manager.module')
+  .then(m => m.CampaignManagerModule)
+},
   { path: '**', component: NotFoundComponent },
 ];
 

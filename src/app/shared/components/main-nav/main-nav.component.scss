@@ -1,7 +1,12 @@
 @import '../../../../assets/styles/main/mixins';
+@import '../../../../assets/styles/theme/palettes';
+
+
+
 
 mat-sidenav {
   width: 20rem;
+  background-color: red;
 }
 
 .sidenav-container {
@@ -53,9 +58,4 @@ main {
   @include flex-self(space-between, auto)
 }
 
-.top-scroll {
-  position: fixed;
-  bottom: 10rem;
-  right: 5rem;
-}
 
