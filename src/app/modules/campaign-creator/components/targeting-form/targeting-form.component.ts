@@ -1,78 +1,113 @@
-import { Component, OnInit } from '@angular/core';
-import { CampaignService } from '@services/campaign.service';
-import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Validators, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { TargetingModel } from '@models/campaign.model';
+
+import { multiplicationInputsValidator, CrossFieldErrorMatcher } from '@shared/validators/validators';
+import { CampaignService } from '@services/campaign.service';
 
 @Component({
   selector: 'app-targeting-form',
   templateUrl: './targeting-form.component.html',
-  styleUrls: ['./targeting-form.component.scss']
+  styleUrls: ['./targeting-form.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TargetingFormComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => TargetingFormComponent),
+      multi: true,
+    }
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TargetingFormComponent implements OnInit {
-  private error: any;
-  public success: any;
-  public name: FormControl;
-  public budget: FormControl;
-  public bid: FormControl;
-  public startDate: FormControl;
-  public endDate: FormControl;
-  public targetingForm: FormGroup;
-  budgetFieldHassError: boolean;
-  constructor(public _campaignService: CampaignService) { }
+export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
 
-  ngOnInit() {
-    this.createControls();
-    this.createForm();
-    if (this._campaignService.currentCampain.id !== null) { this.onEditForm(); }
+  error: any;
+  form: FormGroup;
+  subscriptions: Subscription[] = [];
+  errorMatcher = new CrossFieldErrorMatcher();
+
+  get value(): TargetingModel {
+    return this.form.value;
   }
 
-  createControls() {
-    this.name = new FormControl(null, [Validators.required]);
-    this.budget = new FormControl(null, [Validators.required]);
-    this.bid = new FormControl(null, [Validators.required]);
-    this.startDate = new FormControl(null, [Validators.required]);
-    this.endDate = new FormControl(null, Validators.required);
+  set value(value: TargetingModel) {
+    this.form.setValue(value);
+    this.onChange(value);
+    this.onTouched();
   }
 
-  createForm() {
-    this.targetingForm = new FormGroup({
-      name: this.name,
-      budget: this.budget,
-      bid: this.bid,
-      startDate: this.startDate,
-      endDate: this.endDate,
-    });
-
-    this.targetingForm.get('budget').setValidators(this.greaterThan('bid'));
-    this.targetingForm.valueChanges.subscribe(() => {
-      if (this.targetingForm.get('budget').hasError('lessThan')) {
-        this.budgetFieldHassError = true;
-      } else {
-        this.budgetFieldHassError = false;
-      }
-    });
-
-    this.targetingForm.get('bid').valueChanges.subscribe(() =>
-      console.log('ngOnInit: budget must be bigger then bid * 10 ',
-      this.targetingForm.get('budget').hasError('lessThan')));
+  get targetingFormControls() {
+    return this.form.controls;
   }
 
-  onEditForm() {
-    this.name.setValue(this._campaignService.currentCampain.targeting.name);
-    this.budget.setValue(this._campaignService.currentCampain.targeting.budget);
-    this.bid.setValue(this._campaignService.currentCampain.targeting.bid);
-    this.startDate.setValue(this._campaignService.currentCampain.targeting.startDate);
-    this.endDate.setValue(this._campaignService.currentCampain.targeting.endDate);
+  constructor(
+    public _campaignService: CampaignService,
+    private formBuilder: FormBuilder) {
+
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      budget: ['', Validators.required],
+      bid: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+    }, { validator: multiplicationInputsValidator('budget', 'bid', 10)});
+
+    this.subscriptions.push(
+      this.form.valueChanges.subscribe(value => {
+        this.onChange(value);
+        this.onTouched();
+      })
+    );
   }
 
-  greaterThan(field: string): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} => {
-      const group = control.parent;
-      const fieldToCompare = group.get(field);
-      const isLessThan = Number(fieldToCompare.value) * 10 <= Number(control.value);
-      return isLessThan ? {lessThan: {value: control.value}} : null;
-    };
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  writeValue(value) {
+    if (value) {
+      this.value = value;
+    }
+
+    if (value === null) {
+      this.form.reset();
+    }
+  }
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
+
+  validate(_: FormControl) {
+    return this.form.valid ? null : { targeting: { valid: false, }, };
+  }
+
+  reset() {
+    this.form.reset();
+  }
+
+  getMessge(): string {
+    if (this.form.hasError('multiplicationMissmatch')) {
+      return `Budget must be 10 * bid`;
+    } else if (this.targetingFormControls.bid.errors.required) {
+      return 'bid is required';
+    }
+    return '';
+  }
+
+  clearError() {
+    if (this.error) { this.error = null; }
+  }
 }

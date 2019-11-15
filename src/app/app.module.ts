@@ -18,13 +18,11 @@ import { NotFoundComponent } from '@shared/components/not-found/not-found.compon
 import { MainNavComponent } from '@shared/components/main-nav/main-nav.component';
 
 // pipes
-import { SafePipe } from './pipes/safe-html.pipe';
+
 import { ExtractModelErrorsPipe } from './pipes/extract-model-errors.pipe';
 
 // temp imported for prod build tests
 import { ConfirmDialogComponent } from '@shared/components/helpers/confirm-dialog/confirm-dialog.component';
-import { ErrorPanelComponent } from '@shared/components/helpers/error-panel/error-panel.component';
-import { SuccessPanelComponent } from '@shared/components/helpers/success-panel/success-panel.component';
 
 // services
 import { CampaignService } from '@services/campaign.service';
@@ -37,10 +35,6 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
     ProgressSpinnerComponent,
     MainNavComponent,
     ConfirmDialogComponent,
-    ErrorPanelComponent,
-    SuccessPanelComponent,
-    SafePipe,
-    ExtractModelErrorsPipe,
   ],
   imports: [
     BrowserModule,

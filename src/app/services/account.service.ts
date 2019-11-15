@@ -6,7 +6,8 @@ import { auth } from 'firebase/app';
 import { User, UserInfo } from 'firebase/app';
 
 import UserCredential = firebase.auth.UserCredential;
-export const googleAuthProvider = new auth.GoogleAuthProvider();
+export const googleAuthProvider = null;
+// change to and fix => export const googleAuthProvider = new auth.GoogleAuthProvider();
 export enum AuthProvider {
     EmailAndPassword = 'firebase',
     Google = 'google',

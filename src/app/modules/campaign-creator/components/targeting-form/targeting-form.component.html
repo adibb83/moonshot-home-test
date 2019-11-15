@@ -1,28 +1,50 @@
-<form [formGroup]="targetingForm">
+<div [formGroup]="form">
   <mat-form-field>
-    <input matInput type="text" placeholder="Campaign Name" [formControl]="name">
+    <input matInput placeholder="Campaign Name" type="text" formControlName="name" required>
+    <mat-error
+      *ngIf="targetingFormControls.name.invalid && (targetingFormControls.name.dirty || targetingFormControls.name.touched)">
+      Campaign name required</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="number" placeholder="Daily budget" [formControl]="budget">
+    <input matInput placeholder="Daily budget" 
+    type="number" formControlName="budget" required>
     <span matPrefix>$&nbsp;</span>
+    <mat-error *ngIf="targetingFormControls.budget.invalid
+     && (targetingFormControls.budget.dirty 
+     || targetingFormControls.budget.touched)">
+     Budget is required</mat-error>
+      
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="number" placeholder="'Bid(Max CPC)''" [formControl]="bid">
+    <input matInput type="number" placeholder="Bid(Max CPC)" 
+    formControlName="bid" [errorStateMatcher]="errorMatcher" required>
     <span matPrefix>$&nbsp;</span>
+    <mat-error *ngIf="targetingFormControls.bid.invalid
+    && (targetingFormControls.bid.dirty 
+    || targetingFormControls.bid.touched) 
+    || form.hasError('multiplicationMissmatch')">{{getMessge()}}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="startPicker" [max]="endPicker.value" placeholder="Start Date" [formControl]="startDate">
+    <input matInput placeholder="Start Date" [matDatepicker]="startPicker" formControlName="startDate" required>
     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
     <mat-datepicker #startPicker></mat-datepicker>
+    <mat-error *ngIf="targetingFormControls.startDate.invalid
+     && (targetingFormControls.startDate.dirty 
+     || targetingFormControls.startDate.touched)">
+      Start date required</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [matDatepicker]="endPicker" [min]="startPicker" placeholder="End Date" [formControl]="endDate">
+    <input matInput placeholder="End Date" [matDatepicker]="endPicker" formControlName="endDate" required>
     <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
     <mat-datepicker #endPicker></mat-datepicker>
+    <mat-error *ngIf="targetingFormControls.endDate.invalid
+     && (targetingFormControls.endDate.dirty 
+     || targetingFormControls.endDate.touched)">
+      End date required</mat-error>
   </mat-form-field>
 
-</form>
+</div>
