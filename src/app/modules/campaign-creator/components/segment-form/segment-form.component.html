@@ -1,1 +1,27 @@
-<p>segment-form works!</p>
+
+
+
+<mat-form-field class="example-chip-list">
+	<mat-chip-list #chipList>
+		<mat-chip *ngFor="let selectedDevice of selectedDevices;let indx=index;" [selectable]="selectable" [removable]="removable" (removed)="remove(selectedDevice,indx)">
+			{{selectedDevice.name}}
+			<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+		</mat-chip>
+    <input placeholder="Devices" #deviceInput 
+    [formControl]="segmentFormControls" 
+    [matAutocomplete]="auto" 
+    [matChipInputFor]="chipList"
+     [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+     [matChipInputAddOnBlur]="addOnBlur" 
+     (matChipInputTokenEnd)="selected($event)">
+     <mat-icon matSuffix (click)="openAutocomplite()">keyboard_arrow_down</mat-icon>
+     <mat-error *ngIf="segmentFormControls.touched && segmentFormControls.hasError('required')">Select a device</mat-error>
+	</mat-chip-list>
+	<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+		<mat-option *ngFor="let device of filteredDevices$ | async" [value]="device">
+			{{device.name}}
+		</mat-option>
+	</mat-autocomplete>
+</mat-form-field>
+
+

@@ -26,7 +26,6 @@ import { CampaignService } from '@services/campaign.service';
 })
 export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
 
-  error: any;
   form: FormGroup;
   subscriptions: Subscription[] = [];
   errorMatcher = new CrossFieldErrorMatcher();
@@ -105,9 +104,5 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
       return 'bid is required';
     }
     return '';
-  }
-
-  clearError() {
-    if (this.error) { this.error = null; }
   }
 }

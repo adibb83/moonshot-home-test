@@ -1,8 +1,10 @@
-import { Component, OnInit, SkipSelf, Optional } from '@angular/core';
-import { CampaignModel } from '@models/campaign.model';
+import { Component, OnInit, SkipSelf, Optional, ViewChild } from '@angular/core';
+import { CampaignModel, TargetingModel, SegmentModel } from '@models/campaign.model';
 import { CampaignService } from '@services/campaign.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { TargetingFormComponent } from '../targeting-form/targeting-form.component';
+import { SegmentFormComponent } from '../segment-form/segment-form.component';
 
 @Component({
   selector: 'app-campaign-stepper',
@@ -13,26 +15,37 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     useValue: { showError: true }
   }]
 })
-export class CampaignStepperComponent  {
-  campaignForm: FormGroup;
+export class CampaignStepperComponent {
 
+  @ViewChild(TargetingFormComponent, { static: false }) targetingComponent: TargetingFormComponent;
+  @ViewChild(SegmentFormComponent, { static: false }) segmentComponent: SegmentFormComponent;
+  summeryData: CampaignModel;
 
   constructor(
-    private _formBuilder: FormBuilder ,
+    private _formBuilder: FormBuilder,
     @SkipSelf() @Optional() public _campaignService: CampaignService
-    ) {
+  ) { }
 
-      this.campaignForm = this._formBuilder.group({
-        targeting: [],
-        segment: []
-      });
-    }
+  get targeting() {
+    return this.targetingComponent ? this.targetingComponent.form : null;
+  }
 
-    submit() {
-      console.log(this.campaignForm.value);
-    }
+  get segment() {
+    return this.segmentComponent ? this.segmentComponent.form : null;
+  }
 
-    resetForm() {
-      this.campaignForm.reset();
-    }
+  getSummeryData() {
+    const data: CampaignModel = {} as CampaignModel;
+    data.targeting = this.targetingComponent.form.getRawValue() as unknown as TargetingModel;
+    data.segments = this.segmentComponent.selectedDevices;
+    this.summeryData = data;
+  }
+
+  get summery(): CampaignModel {
+    return this.summeryData;
+  }
+
+  set summery(data: CampaignModel) {
+    this.summeryData = data;
+  }
 }
