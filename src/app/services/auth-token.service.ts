@@ -1,33 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders} from '@angular//common/http';
 
 @Injectable()
 export class AuthTokenService {
     _authToken: any | null;
 
     constructor() {
-        this.authToken = localStorage.getItem('auth-token');
-    }
-
-    headers(Authorization: string) {
-        const headers = new HttpHeaders({
-            Authorization: this.authToken,
-            'Content-Type': 'application/json'
-        });
-        const options = {headers};
-        return options;
+        this.authToken = localStorage.getItem('username');
     }
 
     set authToken(val: string) {
         // console.log('setting auth token', val);
         if (val) {
             this._authToken = val;
-            localStorage.setItem('auth-token', val);
+            localStorage.setItem('username', val);
         }
     }
 
     get authToken() {
-        const authFromStorage = localStorage.getItem('auth-token');
+        const authFromStorage = localStorage.getItem('username');
         if (!this._authToken || this._authToken !== authFromStorage) {
             this._authToken = authFromStorage;
         }
@@ -37,7 +27,7 @@ export class AuthTokenService {
 
     removeAuthToken() {
         this.authToken = null;
-        localStorage.removeItem('auth-token');
+        localStorage.removeItem('username');
     }
 
     isAuthenticated() {

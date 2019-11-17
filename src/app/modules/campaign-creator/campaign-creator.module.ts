@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { SheardModule } from '@modules/sheard/sheard.module';
 import { CampaignCreatorRoutingModule } from './campaign-creator-routing.module';
 import { CampaignStepperComponent } from './components/campaign-stepper/campaign-stepper.component';
 
@@ -24,6 +24,9 @@ import { MatNativeDateModule, MatIconModule, MatSelectModule } from '@angular/ma
 // helpers
 import { ErrorPanelComponent } from '@shared/components/helpers/error-panel/error-panel.component';
 import { ExtractModelErrorsPipe } from '../../pipes/extract-model-errors.pipe';
+import { AuthGuard } from '@services/auth-guard.service';
+import { AuthTokenService } from '@services/auth-token.service';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import { ExtractModelErrorsPipe } from '../../pipes/extract-model-errors.pipe';
     CampaignCreatorRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SheardModule,
     MatStepperModule,
     MatButtonModule,
     MatInputModule,
@@ -51,6 +55,6 @@ import { ExtractModelErrorsPipe } from '../../pipes/extract-model-errors.pipe';
     MatChipsModule,
     MatAutocompleteModule
   ],
-  providers: []
+  providers: [AuthTokenService , AuthGuard]
 })
 export class CampaignCreatorModule { }

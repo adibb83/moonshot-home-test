@@ -5,6 +5,7 @@ import { TargetingModel } from '@models/campaign.model';
 
 import { multiplicationInputsValidator, CrossFieldErrorMatcher } from '@shared/validators/validators';
 import { CampaignService } from '@services/campaign.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-targeting-form',
@@ -48,20 +49,39 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
     public _campaignService: CampaignService,
     private formBuilder: FormBuilder) {
 
+    this.createForm();
+    this.formChangesListener();
+    this.editDataInject();
+  }
+
+  createForm() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
       budget: ['', Validators.required],
       bid: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-    }, { validator: multiplicationInputsValidator('budget', 'bid', 10)});
+    }, { validator: multiplicationInputsValidator('budget', 'bid', 10) });
+  }
 
+  formChangesListener() {
     this.subscriptions.push(
       this.form.valueChanges.subscribe(value => {
         this.onChange(value);
         this.onTouched();
       })
     );
+  }
+
+  editDataInject() {
+    if (this._campaignService.currentCampain && !_.isEmpty(this._campaignService.currentCampain.id)) {
+      console.log(this._campaignService.currentCampain.targeting.startDate);
+      this.form.controls.name.setValue(this._campaignService.currentCampain.targeting.name);
+      this.form.controls.budget.setValue(this._campaignService.currentCampain.targeting.budget);
+      this.form.controls.bid.setValue(this._campaignService.currentCampain.targeting.bid);
+      this.form.controls.startDate.setValue(this._campaignService.currentCampain.targeting.startDate);
+      this.form.controls.endDate.setValue(this._campaignService.currentCampain.targeting.endDate);
+    }
   }
 
   ngOnDestroy() {
@@ -87,10 +107,6 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
-  }
-
-  validate(_: FormControl) {
-    return this.form.valid ? null : { targeting: { valid: false, }, };
   }
 
   reset() {

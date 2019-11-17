@@ -6,7 +6,7 @@ import { SegmentModel } from '@models/campaign.model';
 import { CampaignService } from '@services/campaign.service';
 import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material';
 import { validateRequired } from '@shared/validators/validators';
-
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-segment-form',
@@ -37,6 +37,7 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
   removable = true;
   addOnBlur = false;
   separatorKeysCodes: number[] = [ENTER, COMMA];
+
   @ViewChild('deviceInput', { static: false }) deviceInput: ElementRef;
   @ViewChild(MatAutocompleteTrigger, { static: true }) autocompleteTrigger: MatAutocompleteTrigger;
 
@@ -67,7 +68,11 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
     this.form = this.formBuilder.group({
       segment: [this.selectedDevices, [validateRequired]]
     });
-    this.form.controls.segment.setValue(this.selectedDevices);
+    if (this._campaignService.currentCampain && !_.isEmpty(this._campaignService.currentCampain.id)) {
+      this.form.controls.segment.setValue(this._campaignService.currentCampain.segments);
+    } else {
+      this.form.controls.segment.setValue(this.selectedDevices);
+    }
   }
 
   formValueChange() {
@@ -87,14 +92,12 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log('selected', event, this.selectedDevices);
     if (event.option.value && !this.selectedDevices.find(e => e.name === event.option.value.name.trim())) {
       this.form.controls.segment.setErrors(null);
       this.selectedDevices.push(event.option.value);
       this.form.controls.segment.setValue(this.selectedDevices);
       this.form.controls.segment.updateValueAndValidity();
       this.form.controls.segment.markAsDirty();
-      console.log('after select', this.form.controls);
     }
     this.deviceInput.nativeElement.value = '';
   }
@@ -136,10 +139,6 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
 
   registerOnTouched(fn) {
     this.onTouched = fn;
-  }
-
-  validate(_: FormControl) {
-    return this.form.valid ? null : { segment: { valid: false, }, };
   }
 
   reset() {

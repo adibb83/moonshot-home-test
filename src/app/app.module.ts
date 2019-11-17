@@ -12,7 +12,8 @@ import { CoreModule } from '@modules/core/core.module';
 import { AuthenticationModule } from '@modules/Authentication/authentication.module';
 import { CampaignCreatorModule } from '@modules/campaign-creator/campaign-creator.module';
 import { CampaignManagerModule } from '@modules/campaign-manager/campaign-manager.module';
-
+import { SnackBarComponentComponent } from '@shared/components/snack-bar-component/snack-bar-component.component';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { ProgressSpinnerComponent} from '@shared/components/helpers/progress-spinner/progress-spinner.component';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { MainNavComponent } from '@shared/components/main-nav/main-nav.component';
@@ -26,7 +27,18 @@ import { ConfirmDialogComponent } from '@shared/components/helpers/confirm-dialo
 
 // services
 import { CampaignService } from '@services/campaign.service';
-import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
+import { AccountService } from '@services/account.service';
+import { GlobalAppService } from '@services/global-app.service';
+
+
+// firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule} from '@angular/fire/auth';
+import { from } from 'rxjs';
+
+
 
 @NgModule({
   declarations: [
@@ -35,6 +47,7 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
     ProgressSpinnerComponent,
     MainNavComponent,
     ConfirmDialogComponent,
+    SnackBarComponentComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +55,10 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     AuthenticationModule,
     CampaignCreatorModule,
     CampaignManagerModule,
@@ -49,10 +66,14 @@ import { MAT_LABEL_GLOBAL_OPTIONS } from '@angular/material';
   ],
   entryComponents: [
     ProgressSpinnerComponent,
+    SnackBarComponentComponent
   ],
   providers: [
+    GlobalAppService,
+    AccountService,
     CampaignService,
-    {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}],
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4500}}
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

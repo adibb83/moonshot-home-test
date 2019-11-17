@@ -48,4 +48,8 @@ export class CampaignStepperComponent {
   set summery(data: CampaignModel) {
     this.summeryData = data;
   }
+
+  saveCampaign() {
+    this._campaignService.saveCampaign(this.summeryData);
+  }
 }

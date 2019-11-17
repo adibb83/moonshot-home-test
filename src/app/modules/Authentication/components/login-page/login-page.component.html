@@ -1,14 +1,29 @@
-<form class="example-form">
+<div>
+  <p *ngIf="error" >{{error.message}}</p>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" >
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Favorite food" value="Sushi">
+      <input matInput type="email" placeholder="email"  formControlName="email" required>
+      <mat-error
+      *ngIf="loginFormControls.email.invalid && 
+      (loginFormControls.email.dirty || loginFormControls.email.touched)">
+      {{getEmailError()}}</mat-error>
     </mat-form-field>
-  
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Favorite food" value="Sushi">
-      </mat-form-field>
-  </form>
 
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="password" formControlName="password" required>
+      <mat-error
+      *ngIf="loginFormControls.password.invalid && 
+      (loginFormControls.password.dirty || loginFormControls.password.touched)">
+     {{ getPasswordError()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>
+<div>
+  <span>OR</span>
+</div>
   <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="LoginWithGoogle()">Google</button>
+    <button mat-raised-button color="primary" (click)="loginWithGoogle()">Google</button>
   </div>
-  
+</div>
+

@@ -10,17 +10,12 @@ export class LogOutService {
 
   constructor(
     private _authTokenService: AuthTokenService,
-    // private _agentsService: AgentsService,
-    // private _router: Router,
     public _progressDialogService: ProgressDialogService
   ) { }
 
   logOut() {
     this._progressDialogService.loading(true);
     localStorage.clear();
-
-    // reload to clean any assigned variables of log out user
-    // this._router.navigate(['/account', 'login']);
     window.location.replace('/');
   }
 

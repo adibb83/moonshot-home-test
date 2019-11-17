@@ -28,7 +28,7 @@
                 <app-summery [data]="summeryData"></app-summery>
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button>Save</button>
+                  <button mat-button (click)="saveCampaign()">Save</button>
                 </div>
               </mat-step>
             </mat-horizontal-stepper>

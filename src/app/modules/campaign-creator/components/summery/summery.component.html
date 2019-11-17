@@ -8,8 +8,7 @@
         <mat-list-item><b>Start Date</b><span>{{data?.targeting.startDate | date: 'mediumDate'}}</span></mat-list-item>
         <mat-list-item><b>End Date</b><span>{{data?.targeting.endDate | date: 'mediumDate'}}</span></mat-list-item>
         <mat-list-item>
-            <b>Devices:</b>
-            <span *ngFor="let device of data?.segments">{{device.name}}</span>
+            <b>Devices:</b> <span>{{data?.segments | arrayObjectToString:'name'}}</span>
         </mat-list-item>
       </mat-list>
 </div>
