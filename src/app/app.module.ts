@@ -29,7 +29,8 @@ import { ConfirmDialogComponent } from '@shared/components/helpers/confirm-dialo
 import { CampaignService } from '@services/campaign.service';
 import { AccountService } from '@services/account.service';
 import { GlobalAppService } from '@services/global-app.service';
-
+import { LogOutService } from '@services/log-out.service';
+import { AuthTokenService } from '@services/auth-token.service';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -69,9 +70,11 @@ import { from } from 'rxjs';
     SnackBarComponentComponent
   ],
   providers: [
+    AuthTokenService,
     GlobalAppService,
     AccountService,
     CampaignService,
+    LogOutService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4500}}
     ],
   bootstrap: [AppComponent],

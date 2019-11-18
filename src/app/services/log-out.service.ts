@@ -6,7 +6,6 @@ import { AuthTokenService } from './auth-token.service';
 
 @Injectable()
 export class LogOutService {
-  // private url: string = apiUrl;
 
   constructor(
     private _authTokenService: AuthTokenService,
@@ -15,8 +14,7 @@ export class LogOutService {
 
   logOut() {
     this._progressDialogService.loading(true);
-    localStorage.clear();
-    window.location.replace('/');
+    this._authTokenService.removeAuthToken();
+    window.location.replace('/authentication');
   }
-
 }

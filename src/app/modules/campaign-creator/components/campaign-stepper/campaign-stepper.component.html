@@ -10,7 +10,7 @@
                 <ng-template matStepLabel>Targeting</ng-template>
                 <app-targeting-form></app-targeting-form>
                 <div>
-                  <button mat-button matStepperNext type="button">Next</button>
+                  <button mat-button matStepperNext type="button" [disabled]="!targetingComponent?.form.valid">Next</button>
                 </div>
               </mat-step>
 

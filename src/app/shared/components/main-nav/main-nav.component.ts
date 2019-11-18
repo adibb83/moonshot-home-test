@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { GlobalAppService } from '@services/global-app.service';
+import { LogOutService } from '@services/log-out.service';
+import { AuthTokenService } from '@services/auth-token.service';
 
 @Component({
   selector: 'main-nav',
@@ -19,6 +21,12 @@ export class MainNavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public _globalAppService: GlobalAppService
+    public _globalAppService: GlobalAppService,
+    public _logOutService: LogOutService,
+    public _authTokenService: AuthTokenService
     ) {}
+
+    logOut() {
+      this._logOutService.logOut();
+    }
 }

@@ -26,7 +26,7 @@ export class CampaignsDataGridComponent implements OnInit {
       'actions'
     ];
   private term$ = new BehaviorSubject<string>('');
-  private selectedInput: string | null = '';
+  public selectedInput: string | null = '';
 
   dataSource$: Observable<CampaignModel[]>;
 
@@ -35,10 +35,10 @@ export class CampaignsDataGridComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this.autoCompliteSearch();
+    this.typeAheadSearch();
   }
 
-  autoCompliteSearch() {
+  typeAheadSearch() {
     this.autocomplete = (time, selector) => (source$) =>
       source$.pipe(
         debounceTime(time),
@@ -64,25 +64,40 @@ export class CampaignsDataGridComponent implements OnInit {
     return this._campaignService.getAllCampains()
       .pipe(
         map((res: CampaignModel[]) =>
-        !_.isEmpty(this.selectedInput)  ?
-        res.filter((obj: CampaignModel) => { return (Object.keys(obj.targeting)
-              .filter(key => { return obj.targeting[key]
-                  .toString()
-                  .toLowerCase()
-                  .includes(this.selectedInput.toLowerCase());
-              })); }) : res));
+          !_.isEmpty(this.selectedInput) ?
+            res.filter((obj: CampaignModel) => this.typeAheadFilter(obj)) : res));
   }
 
-  // fetch(): Observable<CampaignModel[]> {
-  //   return this._campaignService.getAllCampains()
-  //     .pipe(
-  //       map((res: CampaignModel[]) =>
-  //       !_.isEmpty(this.selectedInput) ?
-  //       res.filter((obj: CampaignModel) => obj.targeting.name.toLowerCase() === this.selectedInput.toLowerCase()) : res));
-  // }
+  typeAheadFilter(obj: CampaignModel): boolean {
+    let temp = false;
+    Object.keys(obj.targeting)
+      .filter(key => {
+        if (typeof obj.targeting[key] !== 'object' && obj.targeting[key]
+          .toString()
+          .toLowerCase()
+          .includes(this.selectedInput.toLowerCase())) {
+          console.log(obj.targeting[key]);
+          temp = true;
+        }
+      });
+
+    obj.segments.filter(x => {
+      if (x.name.toLowerCase()
+        .includes(this.selectedInput.toLowerCase())) {
+        console.log(x.name);
+        temp = true;
+      }
+    });
+    return temp;
+  }
 
   editCampaign(row: CampaignModel) {
     this._campaignService.currentCampain = row;
+    this._router.navigate(['campaign-creator']);
+  }
+
+  createNewCampaign() {
+    this._campaignService.restartCurrentCampaign();
     this._router.navigate(['campaign-creator']);
   }
 

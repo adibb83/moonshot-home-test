@@ -7,7 +7,7 @@
     <mat-nav-list>
       <a routerLink="/campaign-creator" routerLinkActive="active">Create Campaign</a>
       <a routerLink="/campaign-manager" routerLinkActive="active">Campaigns</a>
-      <a routerLink="/authentication" routerLinkActive="active">Loguot</a>
+      <a routerLink="/authentication" routerLinkActive="active" (click)="logOut()">Loguot</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="page-wrap img-bg">

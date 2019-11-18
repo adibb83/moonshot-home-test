@@ -51,4 +51,8 @@ export class CampaignService {
   getAllCampains(): Observable<CampaignModel[]> {
     return this.allCampaings$;
   }
+
+  restartCurrentCampaign() {
+    this.currentCampain = {} as CampaignModel;
+  }
 }
