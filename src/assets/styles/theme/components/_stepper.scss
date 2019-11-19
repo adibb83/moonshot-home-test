@@ -1,3 +1,26 @@
-.mat-horizontal-content-container{
-    padding: $block-line-lg-height !important; 
+.mat-horizontal-content-container {
+  padding: $block-line-lg-height !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  background-color: $background;
+  min-height: 10rem !important;
+}
+
+.mat-horizontal-stepper-header{
+    .mat-step-label{
+        font-weight: bold;
+    }
+} 
+
+.mat-step-icon {
+  height: 3rem !important;
+  width: 3rem !important;
+  border: solid 0.3rem !important;
+
+  .mat-step-icon-content {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bold;
+  }
 }

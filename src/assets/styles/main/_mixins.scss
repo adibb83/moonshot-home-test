@@ -127,21 +127,6 @@
     }
 }
 
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};      
-}
-
-@mixin animation-delay($str) {
-  -webkit-animation-delay: #{$str};
-  -moz-animation-delay: #{$str};
-  -ms-animation: #{$str};
-  -o-animation-delay: #{$str};
-  animation-delay: #{$str};      
-}
 
 @mixin clearfix() {
     &:before,
@@ -167,19 +152,4 @@
 @mixin font-size($size) {
   font-size: $size;
   font-size: calculateRem($size);
-}
-
-@mixin fontFace($family, $src, $weight: normal, $style: normal) {
-  $root: 'https://ui.over.ai/assets/fonts/';
-  @font-face {
-    font-family: $family;
-    src: url('#{$root}#{$src}.eot'); // IE9 compat
-    src: url('#{$root}#{$src}.eot?#iefix') format('embedded-opentype'), // IE8 and below
-    url('#{$root}#{$src}.otf') format('opentype'), // standards
-    url('#{$root}#{$src}.woff') format('woff'), // standards
-    url('#{$root}#{$src}.ttf') format('truetype'), // Safari, Android, iOS
-    url('#{$root}#{$src}.svg##{$src}') format('svg'); // legacy iOS
-    font-style: $style;
-    font-weight: $weight;
-  }
 }

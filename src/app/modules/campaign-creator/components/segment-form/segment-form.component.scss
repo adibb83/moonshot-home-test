@@ -1,5 +1,5 @@
+@import '../../../../../assets/styles/main/variables';
 @import '../../../../../assets/styles/main/mixins';
-
 .segmentLayout {
   @include display-grid;
   @include grid-repeat(3, 3);

@@ -1,15 +1,17 @@
 <ng-container *ngIf="data">
-<div class="container">
-    <h2>{{data?.targeting.name}}</h2>
-    <mat-divider></mat-divider>
-    <mat-list>
+    <div class="summeryContainer">
+      <h2>{{data?.targeting.name}}</h2>
+      <mat-divider></mat-divider>
+      <mat-list>
         <mat-list-item><b>Daily Budget:</b> <span>&#36;{{data?.targeting.budget}}</span> </mat-list-item>
         <mat-list-item><b>Bid:</b><span>&#36;{{data?.targeting.bid}}</span></mat-list-item>
-        <mat-list-item><b>Start Date</b><span>{{data?.targeting.startDate | date: 'mediumDate'}}</span></mat-list-item>
-        <mat-list-item><b>End Date</b><span>{{data?.targeting.endDate | date: 'mediumDate'}}</span></mat-list-item>
+        <mat-list-item><b>Start Date:</b><span>{{data?.targeting.startDate | date: 'mediumDate'}}</span></mat-list-item>
+        <mat-list-item><b>End Date:</b><span>{{data?.targeting.endDate | date: 'mediumDate'}}</span></mat-list-item>
+        <br>
+        <br>
         <mat-list-item>
-            <b>Devices:</b> <span>{{data?.segments | arrayObjectToString:'name'}}</span>
+          <b>Devices:</b> <span>{{data?.segments | arrayObjectToString:'name'}}</span>
         </mat-list-item>
       </mat-list>
-</div>
+  </div>
 </ng-container>
