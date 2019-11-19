@@ -10,9 +10,12 @@ html {
   font-size:16px;
 }
 
-body {
-  @include calc( font-size, '1em + .35vw');
+:root {
+  font-size: 62.5%;
 }
+// body {
+//  //@include calc( font-size, '1em + .35vw');
+// }
 
 html,
 body,

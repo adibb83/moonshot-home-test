@@ -1,4 +1,10 @@
 
+@mixin box-shadow {
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+
+
 @mixin border-radius($r) {
   -webkit-border-radius: $r;
      -moz-border-radius: $r;
@@ -91,6 +97,16 @@
   -webkit-justify-content: $justify;
   -moz-justify-content: $justify;
   justify-content: $justify;
+}
+
+@mixin display-grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+@mixin grid-repeat($repeatRowNum, $repeatColNum) {
+  grid-template-columns: repeat($repeatColNum, 1fr);
+  grid-auto-rows: repeat($repeatRowNum, 1fr);
 }
 
 @mixin keyframes($name) {

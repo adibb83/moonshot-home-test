@@ -1,0 +1,39 @@
+@import 'components/stepper';
+@import 'components/form-fields/form-field';
+
+
+[class*="mat-elevation-z"] {
+  @include border-radius(10px);
+}
+
+.mat-divider {
+  border-top-color: $border-color !important;
+}
+
+.mat-card {
+  @include border-radius(10px);
+  @include box-shadow;
+}
+
+.mat-body p,
+.mat-body-1 p,
+.mat-typography p {
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.mat-icon {
+  vertical-align: sub;
+  &[svgicon] {
+    font-size: 0;
+  }
+}
+
+.mat-expansion-indicator {
+  margin-right: 7px;
+}
+
+.mat-card-header-text {
+  overflow: hidden;
+}

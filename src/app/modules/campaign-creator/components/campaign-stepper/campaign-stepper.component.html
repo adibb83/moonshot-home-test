@@ -1,10 +1,10 @@
 
-<div class="container" fxLayout="row" fxLayoutAlign="center none">
-  <div fxFlex="98%">
+<div class="container" >
+  <div>
     <mat-card>
       <mat-card-content>
-        <div class="operation-detail container" fxLayout="row" fxLayoutAlign="center none">
-          <div fxFlex="98%">
+        <div class="container" >
+          <div>
             <mat-horizontal-stepper linear="true" #stepper>
               <mat-step [stepControl]="targeting">
                 <ng-template matStepLabel>Targeting</ng-template>
@@ -39,33 +39,5 @@
   </div>
 </div>
 
-<!-- <form [formGroup]="campaignForm">
-  <mat-horizontal-stepper linear #stepper>
-    <mat-step formGroupName="0" [stepControl]="campaignForm.get([0])" errorMessage="All fields required.">
-      <ng-template matStepLabel>Targeting</ng-template>
-      <app-targeting-form formControlName="targeting"></app-targeting-form>
-      <div>
-        <button mat-button matStepperNext type="button">Next</button>
-      </div>
-    </mat-step>
-    <mat-step formGroupName="1" [stepControl]="campaignForm.get([1])" errorMessage="All fields required.">
-      <ng-template matStepLabel>Segment</ng-template>
-      <app-segment-form formControlName="segment"></app-segment-form>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</form> -->
 
 

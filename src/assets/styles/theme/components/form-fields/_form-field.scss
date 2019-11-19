@@ -1,0 +1,208 @@
+.mat-form-field {
+    font-weight: mat-font-weight($moonshot-typography, body-1);
+    width: 100% !important;
+    margin: 1rem;
+  }
+
+  .mat-form-field-flex {
+    @include border-radius(5px);
+    align-items: center !important;
+    background-color: white !important;
+    border: 1px solid $border-color !important;
+    padding: $block-line-md-padding !important; 
+  }
+  
+  .mat-form-field-underline {
+    display: none;
+    background-color: $border-color;
+  }
+  
+  .mat-focused {
+    .mat-form-field-flex {
+      border-color: $primary !important;
+    }
+    &.mat-accent .mat-form-field-flex {
+      border-color: $accent !important;
+    }
+  }
+  
+  .mat-warn,
+  .mat-form-field-invalid {
+    .mat-form-field-flex
+      {
+      border-color: $warn !important;
+    }
+  }
+  
+  .mat-form-field-type-mat-select .mat-form-field-label {
+    font-weight: mat-font-weight($moonshot-typography, body-2) !important;
+  }
+  
+  .mat-form-field-invalid .mat-form-field-label {
+    color: $pale;
+  }
+  
+  .mat-form-field-disabled .mat-form-field-flex {
+    background-color: #f8f8f8 !important;
+    border: solid 1px #fcfcfc !important;
+  }
+  
+  .mat-form-field-placeholder {
+    // color: currentColor;
+    top: 5rem;
+  }
+  
+  .mat-form-field-wrapper {
+    padding-bottom: 2.7rem;
+  }
+  
+  .mat-input-flex.mat-form-field-flex {
+    margin-top: 2.7rem;
+  }
+  
+  .mat-form-field-infix {
+    min-height: calc(#{$block-line-md-height} - 2px);
+    display: flex !important;
+    border-top: 0 none;
+    position: unset !important;
+  }
+  
+  .mat-input-element {
+    vertical-align: middle !important;
+    unicode-bidi: plaintext;
+    text-align: left;
+    font-weight: mat-font-weight($moonshot-typography, body-2);
+  }
+  
+  .mat-form-field-placeholder-wrapper {
+    top: -2.8rem;
+    padding-top: 2.8rem;
+  }
+  
+  .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-placeholder {
+    transform: translateY(-3.1rem) !important;
+    width: initial !important;
+    font-size: mat-font-size($moonshot-typography, caption);
+  }
+  
+  .mat-form-field-subscript-wrapper {
+    top: calc(100% - 2.8rem);
+    font-size: mat-font-size($moonshot-typography, caption) !important;
+    overflow: visible;
+    padding: 0 1rem;
+    margin-top: .5rem;
+  }
+  
+  .mat-error {
+    text-align: start;
+  }
+  
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    align-items: center;
+    display: flex;
+  } // SELECT
+  ////////////////////////////
+  .mat-select {
+    display: flex !important;
+    align-items: center;
+  }
+  
+  .mat-select-value {
+    color: currentColor !important;
+  }
+  
+  .mat-select-arrow {
+    color: currentColor !important;
+  }
+  
+  .mat-option-text {
+    unicode-bidi: plaintext;
+  }
+  
+  .mat-select-value-text {
+    @include mat-typography-level-to-styles($moonshot-typography, body-2);
+  }
+  
+  .mat-select-panel {
+    @include border-radius(5px);
+    border: 1px solid $border-color;
+  }
+  
+  .mat-select-disabled {
+    .mat-select-value,
+    .mat-select-arrow,
+    +.mat-form-field-placeholder-wrapper .mat-form-field-placeholder {
+      color: $pale !important;
+    }
+  }
+  
+  .mat-select-panel .mat-option {
+    &.mat-selected,
+    &.mat-active {
+      &:not(.mat-option-multiple) {
+        background-color: inherit;
+      }
+      &:focus,
+      &:hover {
+        background-color: $hover;
+      }
+    }
+  }
+  
+  .mat-option {
+    @include mat-typography-level-to-styles($moonshot-typography, body-1);
+    padding: $block-line-md-padding;
+    line-height: $block-line-md-height;
+    height: $block-line-md-height;
+  }
+  
+  .mat-select-panel .mat-optgroup-label,
+  .mat-select-panel .mat-option {
+    line-height: $block-line-md-height;
+    height: $block-line-md-height;
+  }
+  
+  .mat-hint {
+    color: $pale;
+  }
+  
+  .mat-form-field-label {
+    line-height: normal !important;
+    font-weight: 500 !important;
+  }
+  
+  input.mat-chip-input {
+    margin: 0 !important;
+  }
+
+  .mat-chip-list-wrapper{
+    display: block !important;
+  }
+  
+  .mat-checkbox-frame {
+    border-width: 1px !important;
+    border-radius: 3px !important;
+    border-color: $border-color;
+  }
+  
+  .mat-checkbox-layout {
+    white-space: initial !important;
+  }
+  
+  .mat-form-field[pristine] {
+    .mat-form-field-underline {
+      display: block;
+    }
+    .mat-form-field-flex {
+      background-color: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+    .mat-form-field-infix {
+      padding: 0;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 2rem;
+    }
+  }

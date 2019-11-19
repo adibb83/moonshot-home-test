@@ -30,7 +30,6 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/assets/styles/theme/app-theme.scss",
               "src/assets/styles/main/main.scss"
             ],
             "scripts": []

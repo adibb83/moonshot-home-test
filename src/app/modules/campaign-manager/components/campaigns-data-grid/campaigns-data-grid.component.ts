@@ -25,7 +25,7 @@ export class CampaignsDataGridComponent implements OnInit {
       'status',
       'actions'
     ];
-  private term$ = new BehaviorSubject<string>('');
+  public term$ = new BehaviorSubject<string>('');
   public selectedInput: string | null = '';
 
   dataSource$: Observable<CampaignModel[]>;

@@ -1,0 +1,14 @@
+@import '../../../../../assets/styles/main/mixins';
+
+.targetingLayout{
+    @include display-grid;
+    @include grid-repeat(0,3);
+    min-height: 30rem;
+}
+
+.formLayout{
+    grid-column: 2;
+    display: flex;
+    @include flex-flow(column);
+    @include flex-order(center, center);
+}

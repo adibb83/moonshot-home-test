@@ -2,7 +2,7 @@
   <div class="container">
     <div class="searchBar">
         <mat-form-field>
-          <input matInput placeholder="Search" (input)="term$.next()" [(ngModel)]="selectedInput">
+          <input matInput placeholder="Search" (input)="term$.next('')" [(ngModel)]="selectedInput">
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="createNewCampaign()">New Campaign</button>
