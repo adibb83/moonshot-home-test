@@ -5,7 +5,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { User, UserInfo } from 'firebase/app';
 
+
 import UserCredential = firebase.auth.UserCredential;
+import { Router } from '@angular/router';
 export const googleAuthProvider = new auth.GoogleAuthProvider();
 
 export enum AuthProvider {
@@ -19,6 +21,7 @@ export class AccountService {
   user: User;
   public loginError$ = new Subject<string>();
   constructor(
+    private _router: Router,
     private _afAuth: AngularFireAuth
   ) { }
 
@@ -56,7 +59,9 @@ export class AccountService {
     //   this.showToast(this.messageOnAuthSuccess || fallbackMessage);
     // }
     console.log(userCredential);
-    localStorage.setItem('username', userCredential.additionalUserInfo.username);
+    // tslint:disable-next-line:no-string-literal
+    localStorage.setItem('userId', userCredential.additionalUserInfo.profile['id']);
+    this._router.navigate(['/campaign-manager']);
   }
 
   handleError(error: any) {
@@ -65,7 +70,7 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     this._afAuth.auth.signOut();
   }
 }

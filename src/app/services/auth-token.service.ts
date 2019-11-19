@@ -5,19 +5,19 @@ export class AuthTokenService {
     _authToken: any | null;
 
     constructor() {
-        this.authToken = localStorage.getItem('username');
+        this.authToken = localStorage.getItem('userId');
     }
 
     set authToken(val: string) {
         // console.log('setting auth token', val);
         if (val) {
             this._authToken = val;
-            localStorage.setItem('username', val);
+            localStorage.setItem('userId', val);
         }
     }
 
     get authToken() {
-        const authFromStorage = localStorage.getItem('username');
+        const authFromStorage = localStorage.getItem('userId');
         if (!this._authToken || this._authToken !== authFromStorage) {
             this._authToken = authFromStorage;
         }
@@ -27,7 +27,7 @@ export class AuthTokenService {
 
     removeAuthToken() {
         this.authToken = null;
-        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
     }
 
     isAuthenticated() {

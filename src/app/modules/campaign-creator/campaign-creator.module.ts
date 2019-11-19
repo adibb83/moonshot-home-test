@@ -26,6 +26,7 @@ import { ErrorPanelComponent } from '@shared/components/helpers/error-panel/erro
 import { ExtractModelErrorsPipe } from '../../pipes/extract-model-errors.pipe';
 import { AuthGuard } from '@services/auth-guard.service';
 import { AuthTokenService } from '@services/auth-token.service';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { AuthTokenService } from '@services/auth-token.service';
     MatIconModule,
     MatSelectModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MomentDateModule
   ],
   providers: [AuthTokenService , AuthGuard]
 })

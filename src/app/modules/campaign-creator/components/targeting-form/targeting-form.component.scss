@@ -1,14 +1,20 @@
+@import '../../../../../assets/styles/main/variables';
 @import '../../../../../assets/styles/main/mixins';
+$border-width: 2px;
 
-.targetingLayout{
-    @include display-grid;
-    @include grid-repeat(0,3);
-    min-height: 30rem;
+.targetingLayout {
+  @include display-grid;
+  @include grid-repeat(0, 3);
+  min-height: 30rem;
+  padding: $block-line-lg-height;
+  background-color: $forms-back-color;
+  border-bottom: $border-width solid $pale;
+  border-top: $border-width solid $pale;
 }
 
-.formLayout{
-    grid-column: 2;
-    display: flex;
-    @include flex-flow(column);
-    @include flex-order(center, center);
+.formLayout {
+  grid-column: 2;
+  display: flex;
+  @include flex-flow(column);
+  @include flex-order(center, center);
 }

@@ -1,0 +1,40 @@
+@import '../../../../../assets/styles/main/variables';
+@import '../../../../../assets/styles/main/mixins';
+
+
+.loginLayout {
+  @include display-grid;
+  @include grid-repeat(2, 3);
+  padding: $block-line-lg-height;
+}
+
+.loginHeader {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-flow: column;
+
+  .error{
+      color:red;
+  }
+}
+
+.formLayout {
+  grid-row: 2;
+  grid-column: 2;
+  @include display-grid;
+  @include grid-repeat(5, 0);
+  justify-items: center;
+  gap: 3rem;
+  border: solid 5px $border-color;
+  padding: $block-line-lg-height;
+
+  button {
+    width: 100%;
+    margin: 1rem;
+  }
+
+  .button-row{
+      width: 100%;
+  }
+}

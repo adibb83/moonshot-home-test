@@ -16,13 +16,13 @@ export class CampaignsDataGridComponent implements OnInit {
   private autocomplete;
   displayedColumns: string[] =
     [
+      'status',
       'name',
       'startDate',
       'endDate',
       'devices',
       'budget',
       'bid',
-      'status',
       'actions'
     ];
   public term$ = new BehaviorSubject<string>('');

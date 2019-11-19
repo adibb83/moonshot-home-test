@@ -1,0 +1,41 @@
+.mat-row.highlighted {
+    background: lightblue;
+  }
+  table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+  }
+   
+  .mat-header-cell, .mat-sort-header {
+    font-weight: 600;
+  }
+   
+   .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    font-size: medium;
+    font-weight: bold;
+    text-decoration:underline;
+  }
+  
+  .edit-fab {
+    width: 20px !important;
+    height: 20px !important;
+    line-height: 14px !important;
+    font-size: 14px !important;
+  
+   .mat-button-wrapper{
+        line-height: 14px !important;
+        padding: 0 !important;
+        background-color: transparent;
+         .mat-icon {
+             font-size: 14px !important;
+             padding-right: 4px !important;
+             padding-top: 4px !important;
+             
+             color:$primary
+         }
+   }
+  }

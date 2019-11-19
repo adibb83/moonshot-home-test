@@ -1,9 +1,16 @@
 @import '../../../../../assets/styles/main/variables';
 @import '../../../../../assets/styles/main/mixins';
+
+$border-width:2px;
+
 .segmentLayout {
   @include display-grid;
   @include grid-repeat(3, 3);
   min-height: 30rem;
+  padding:$block-line-lg-height;
+  background-color: $forms-back-color;
+  border-bottom: $border-width solid $pale;
+  border-top: $border-width solid $pale;
 }
 
 .formLayout {

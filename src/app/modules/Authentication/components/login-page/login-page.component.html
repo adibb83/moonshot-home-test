@@ -1,29 +1,31 @@
-<div>
-  <p *ngIf="error" >{{error.message}}</p>
-  <form [formGroup]="loginForm" (ngSubmit)="login()" >
-    <mat-form-field class="example-full-width">
-      <input matInput type="email" placeholder="email"  formControlName="email" required>
-      <mat-error
-      *ngIf="loginFormControls.email.invalid && 
+<div class="loginLayout">
+  <div class="loginHeader">
+    <h3>Login</h3>
+    <p *ngIf="error" class="error" >{{error.message}}</p>
+  </div>
+  <div class="formLayout">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field class="example-full-width">
+        <input matInput type="email" placeholder="Email" formControlName="email" required>
+        <mat-error *ngIf="loginFormControls.email.invalid && 
       (loginFormControls.email.dirty || loginFormControls.email.touched)">
-      {{getEmailError()}}</mat-error>
-    </mat-form-field>
+          {{getEmailError()}}</mat-error>
+      </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput type="password" placeholder="password" formControlName="password" required>
-      <mat-error
-      *ngIf="loginFormControls.password.invalid && 
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" placeholder="Password" formControlName="password" required>
+        <mat-error *ngIf="loginFormControls.password.invalid && 
       (loginFormControls.password.dirty || loginFormControls.password.touched)">
-     {{ getPasswordError()}}</mat-error>
-    </mat-form-field>
+          {{ getPasswordError()}}</mat-error>
+      </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form>
-<div>
-  <span>OR</span>
-</div>
-  <div class="example-button-row">
-    <button mat-raised-button color="primary" (click)="loginWithGoogle()">Google</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+    </form>
+    <div>
+      <span>OR</span>
+    </div>
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="loginWithGoogle()">Login With Google</button>
+    </div>
   </div>
 </div>
-

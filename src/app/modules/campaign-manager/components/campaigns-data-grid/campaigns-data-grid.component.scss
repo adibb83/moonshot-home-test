@@ -1,40 +1,45 @@
-.mat-row.highlighted {
-    background: lightblue;
+@import '../../../../../assets/styles/main/variables';
+@import '../../../../../assets/styles/main/mixins';
+
+$border-width:2px;
+
+.pageLayout {
+  @include display-grid;
+  @include grid-repeat(3, 0);
+}
+
+.header {
+  grid-row: 1;
+  color: $primary;
+  h3{
+    font-weight: 500;
   }
-   
-  table {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    min-width: 500px;
-  }
-   
-  .mat-header-cell, .mat-sort-header {
-    background-color: darksalmon;
-  }
-   
-  :host ::ng-deep .mat-sort-header-container {
-    display: flex;
-    justify-content: center;
-    font-size: medium;
-    font-weight: bold;
-    text-decoration:underline;
+}
+
+.actions {
+  grid-row: 2;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background;
+  border-bottom: $border-width solid $pale;
+
+  .mat-form-field {
+    width: 20rem !important;
   }
 
-  .edit-fab {
-    width: 20px;
-    height: 20px;
-    line-height: 14px;
-    font-size: 14px;
+  button {
+    margin: 1rem;
+    border-color: $primary;
+  }
+}
 
-    &::ng-deep .mat-button-wrapper{
-        line-height: 14px;
-        padding: 0;
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding: 0 !important;
+}
 
-         .mat-icon {
-             font-size: 14px;
-             padding-right: 4px;
-             padding-top: 4px;
-         }
-   }
+.gridContainer {
+  grid-row: 3;
+
 }

@@ -10,10 +10,9 @@ import { SegmentFormComponent } from '../segment-form/segment-form.component';
   selector: 'app-campaign-stepper',
   templateUrl: './campaign-stepper.component.html',
   styleUrls: ['./campaign-stepper.component.scss'],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS,
-    useValue: { showError: true }
-  }]
+  providers: [{provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true }},
+    {provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }}
+  ]
 })
 export class CampaignStepperComponent {
 

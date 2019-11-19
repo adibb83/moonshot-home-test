@@ -1,16 +1,31 @@
+// stepper header
+
 $state-number-color:#2093d6;
+$state-number-invalid:#7bb6d8;
 
-.mat-horizontal-content-container {
-  padding: $block-line-lg-height !important;
 
+
+.mat-stepper-horizontal {
+  background-color: $background !important;
 }
 
+.mat-horizontal-content-container {
+  padding: 0 0 1rem 0 !important;
+
+}
 
 
 .mat-horizontal-stepper-header-container {
   position: relative;
   background-color: $background;
   min-height: 10rem !important;
+
+  .mat-horizontal-stepper-header {
+    box-sizing: border-box !important;
+    flex-direction: column-reverse !important;
+    height: auto;
+    padding: 24px !important;
+}
 
   .mat-step-header {
     position: absolute !important;
@@ -49,29 +64,42 @@ $state-number-color:#2093d6;
 .mat-horizontal-stepper-header {
   .mat-step-label {
     font-weight: bold;
+    padding: 0px 0px 16px !important;
   }
 }
-
-
 
 .mat-step-header .mat-step-icon-selected,
 .mat-step-header .mat-step-icon-state-done,
 .mat-step-header .mat-step-icon-state-edit {
   background-color: $state-number-color !important;
-  opacity: 100% !important;
-}
 
+}
 
 .mat-horizontal-stepper-header .mat-step-icon {
   height: 3rem !important;
   width: 3rem !important;
   border: solid 0.3rem !important;
-  background-color: $state-number-color !important;
-  opacity: 80%;
+  background-color: $state-number-invalid;
 
   .mat-step-icon-content {
     font-size: 1.5rem;
     color: white;
     font-weight: bold;
   }
+}
+
+
+// stepper button control
+.right-step-button {
+  float: right;
+  margin: 1.5rem 2rem !important;
+  min-width: 10rem !important;
+  .mat-icon{
+    color:white;
+  }
+}
+
+.left-step-button{
+  float: left;
+  margin: 1.5rem 2rem !important;
 }

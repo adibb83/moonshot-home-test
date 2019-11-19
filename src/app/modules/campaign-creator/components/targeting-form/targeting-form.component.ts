@@ -2,10 +2,25 @@ import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angu
 import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Validators, NG_VALIDATORS, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TargetingModel } from '@models/campaign.model';
-
+import * as _moment from 'moment';
+import {default as _rollupMoment, Moment} from 'moment';
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { multiplicationInputsValidator, CrossFieldErrorMatcher } from '@shared/validators/validators';
 import { CampaignService } from '@services/campaign.service';
 import * as _ from 'lodash';
+
+const moment = _rollupMoment || _moment;
+
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+  },
+};
+
 
 @Component({
   selector: 'app-targeting-form',
@@ -21,7 +36,8 @@ import * as _ from 'lodash';
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => TargetingFormComponent),
       multi: true,
-    }
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -75,12 +91,17 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
 
   editDataInject() {
     if (this._campaignService.currentCampain && !_.isEmpty(this._campaignService.currentCampain.id)) {
-      console.log(this._campaignService.currentCampain.targeting.startDate);
+      const firebseTimestampKey = 'seconds';
+
+      console.log(moment.unix(this._campaignService.currentCampain.targeting.endDate[firebseTimestampKey]));
+
       this.form.controls.name.setValue(this._campaignService.currentCampain.targeting.name);
       this.form.controls.budget.setValue(this._campaignService.currentCampain.targeting.budget);
       this.form.controls.bid.setValue(this._campaignService.currentCampain.targeting.bid);
-      this.form.controls.startDate.setValue(this._campaignService.currentCampain.targeting.startDate);
-      this.form.controls.endDate.setValue(this._campaignService.currentCampain.targeting.endDate);
+      this.form.controls.startDate.setValue(
+        moment.unix(this._campaignService.currentCampain.targeting.startDate[firebseTimestampKey]));
+      this.form.controls.endDate.setValue(
+       moment.unix(this._campaignService.currentCampain.targeting.endDate[firebseTimestampKey]));
     }
   }
 
