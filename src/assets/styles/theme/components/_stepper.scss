@@ -1,22 +1,73 @@
+$state-number-color:#2093d6;
+
 .mat-horizontal-content-container {
   padding: $block-line-lg-height !important;
+
 }
+
+
 
 .mat-horizontal-stepper-header-container {
+  position: relative;
   background-color: $background;
   min-height: 10rem !important;
+
+  .mat-step-header {
+    position: absolute !important;
+    z-index: 10;
+
+    &:nth-child(1) {
+      left: 15%;
+    }
+
+    &:nth-child(3) {
+      left: 50%;
+    }
+
+    &:nth-child(5) {
+      left: 85%;
+    }
+  }
+
+  .mat-stepper-horizontal-line {
+    position: absolute;
+    top: 65%;
+    width: 100%;
+    border-color: $state-number-color;
+    background-position: left !important;
+    background-size: 1px 10px !important;
+    background-repeat: repeat-y !important;
+    border-top-style: dotted;
+    border-top-width: 4px;
+    margin: 0 -3px;
+    z-index: 1;
+    opacity: 30%;
+  }
+
 }
 
-.mat-horizontal-stepper-header{
-    .mat-step-label{
-        font-weight: bold;
-    }
-} 
+.mat-horizontal-stepper-header {
+  .mat-step-label {
+    font-weight: bold;
+  }
+}
 
-.mat-step-icon {
+
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: $state-number-color !important;
+  opacity: 100% !important;
+}
+
+
+.mat-horizontal-stepper-header .mat-step-icon {
   height: 3rem !important;
   width: 3rem !important;
   border: solid 0.3rem !important;
+  background-color: $state-number-color !important;
+  opacity: 80%;
 
   .mat-step-icon-content {
     font-size: 1.5rem;
