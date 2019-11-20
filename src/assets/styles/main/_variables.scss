@@ -11,7 +11,7 @@ $accent: mat-color($app-accent);
 $warn: mat-color($app-warn);
 // Other colors
 $background: #e3e5e7;
-$foreground: rgba(133, 133, 133, 0.972);
+$foreground: #e1e3e6c0;
 $chip: #696969;
 $link: $primary;
 $pale: #c0baba;
@@ -21,7 +21,7 @@ $disabled: #f8f8f8;
 $forms-back-color: #ffff;
 
 // Font
-$font-main: "\"SharpSansDisplayNo1\", -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", \"Helvetica Neue\", Arial, Ubuntu, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"";
+$font-main: "Arial, Helvetica, sans-serif, -apple-system, system-ui, BlinkMacSystemFont, \"Segoe UI\", \"Helvetica Neue\", Arial, Ubuntu, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"";
 // Animations
 $transition: .3s ease-in-out;
 

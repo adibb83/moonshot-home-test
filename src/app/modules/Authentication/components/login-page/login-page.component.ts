@@ -31,11 +31,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   get loginFormControls() {
     return this.loginForm.controls;
   }
+
   ngOnInit() {
     this.createForm();
   }
 
   login() {
+    this.error = null;
     this.userCredentials = new AccountLoginModel(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
     this._accountService.signInWith(AuthProvider.EmailAndPassword, this.userCredentials);
   }
@@ -63,6 +65,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

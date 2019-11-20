@@ -9,16 +9,19 @@ const routes: Routes = [
   loadChildren: () => import('@modules/Authentication/authentication-routing.module')
   .then(m => m.AuthenticationRoutingModule)
 },
+
 { path: 'campaign-creator',
   loadChildren: () => import('@modules/campaign-creator/campaign-creator.module')
   .then(m => m.CampaignCreatorModule),
   canActivate: [AuthGuard]
 },
+
 { path: 'campaign-manager',
   loadChildren: () => import('@modules/campaign-manager/campaign-manager.module')
   .then(m => m.CampaignManagerModule),
   canActivate: [AuthGuard]
 },
+
   { path: '**', component: NotFoundComponent },
 ];
 

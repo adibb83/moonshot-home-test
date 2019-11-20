@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="header">
+    <h3>
+      <mat-icon>add</mat-icon> Create Campaign
+    </h3>
+  </div>
   <div>
     <mat-card>
       <mat-card-content>
@@ -9,8 +14,7 @@
                 <ng-template matStepLabel>Targeting</ng-template>
                 <app-targeting-form></app-targeting-form>
                 <div>
-                  <button mat-raised-button class="right-step-button" color="primary" 
-                  matStepperNext type="button"
+                  <button mat-raised-button class="right-step-button" color="primary" matStepperNext type="button"
                     [disabled]="!targetingComponent?.form.valid">
                     <mat-icon>arrow_forward</mat-icon>
                   </button>
@@ -21,15 +25,14 @@
                 <ng-template matStepLabel>Segment</ng-template>
                 <app-segment-form></app-segment-form>
                 <div>
-                  <button mat-button class="left-step-button"  matStepperPrevious>
-                    <mat-icon color="primary" >
+                  <button mat-button class="left-step-button" matStepperPrevious>
+                    <mat-icon color="primary">
                       arrow_back
                     </mat-icon>
                   </button>
 
-                  <button mat-raised-button class="right-step-button" 
-                  color="primary" matStepperNext (click)="getSummeryData()"
-                    [disabled]="!segmentComponent?.form.valid">
+                  <button mat-raised-button class="right-step-button" color="primary" matStepperNext
+                    (click)="getSummeryData()" [disabled]="!segmentComponent?.form.valid">
                     <mat-icon>arrow_forward</mat-icon>
                   </button>
                 </div>
@@ -39,14 +42,13 @@
                 <ng-template matStepLabel>Summery</ng-template>
                 <app-summery [data]="summeryData"></app-summery>
                 <div>
-                  <button mat-button  matStepperPrevious>
+                  <button mat-button matStepperPrevious>
                     <mat-icon class="left-step-button" color="primary">
                       arrow_back
                     </mat-icon>
                   </button>
 
-                  <button mat-raised-button color="green" 
-                  (click)="saveCampaign()">Save</button>
+                  <button mat-raised-button class="submit" (click)="saveCampaign()">Submit</button>
                 </div>
               </mat-step>
             </mat-horizontal-stepper>

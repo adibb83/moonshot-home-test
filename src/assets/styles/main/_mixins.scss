@@ -106,7 +106,7 @@
 
 @mixin grid-repeat($repeatRowNum, $repeatColNum) {
   grid-template-columns: repeat($repeatColNum, 1fr);
-  grid-auto-rows: repeat($repeatRowNum, 1fr);
+  grid-template-rows: repeat($repeatRowNum, auto);
 }
 
 @mixin keyframes($name) {

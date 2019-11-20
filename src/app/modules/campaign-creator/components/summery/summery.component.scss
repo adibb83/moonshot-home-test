@@ -1,13 +1,15 @@
 @import '../../../../../assets/styles/main/variables';
 @import '../../../../../assets/styles/main/mixins';
+
 $border-width: 2px;
+
 .summeryContainer {
   @include display-grid;
   grid-template-columns: 1fr 1fr 2fr;
   grid-auto-rows: repeat(3, auto);
   gap: 0.5rem;
   min-height: 30rem;
-  padding:$block-line-lg-height;
+  padding: $block-line-lg-height;
   background-color: $forms-back-color;
   border-bottom: $border-width solid $pale;
   border-top: $border-width solid $pale;
@@ -15,28 +17,29 @@ $border-width: 2px;
   h2 {
     grid-row: 1;
     grid-column: 2;
-
+    color: gray;
   }
 
 
 
-  mat-divider{
+  mat-divider {
     grid-row: 2;
     grid-column: 1 / span 3;
-    
+
   }
 
   mat-list {
     grid-row: 3;
     grid-column: 2;
 
-    span{
-        margin-left: 0.5rem;
+    span {
+      margin-left: 0.5rem;
     }
   }
 
 }
 
 ::ng-deep .mat-card .mat-divider-horizontal {
-    position: unset !important;
+  position: unset !important;
 }
+

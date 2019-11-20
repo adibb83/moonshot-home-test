@@ -14,9 +14,6 @@ html {
 :root {
   font-size: 62.5%;
 }
-// body {
-//  //@include calc( font-size, '1em + .35vw');
-// }
 
 html,
 body,
@@ -26,6 +23,7 @@ buttons {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  box-sizing: border-box;
 }
 
 button,
@@ -42,7 +40,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-weight: bold; // text-transform: uppercase;
+  font-weight: bold; 
 }
 
 h1 {
@@ -112,10 +110,6 @@ h5 {
   width: 100%;
 }
 
-// .btn-raw {
-//   all: unset;
-//   cursor: pointer;
-// }
 .input-raw {
   background-color: transparent;
   margin: 0;
@@ -135,21 +129,6 @@ h5 {
   background-color: rgba(white, .8);
 }
 
-// .page-title {
-//   float: left;
-//   &~button {
-//     float: right;
-//     transform: translateY(40%);
-//   }
-//   &>i {
-//     /*margin-right: .3em;*/
-//     vertical-align: sub;
-//   }
-// }
-// .material-icons {
-//   vertical-align: middle;
-//   /*margin-right: .25em;*/
-// }
 mark {
   border-radius: 2px;
   padding: 0px 1px;
@@ -160,26 +139,6 @@ mark {
   cursor: pointer;
   border-radius: 2px;
 }
-
-
-/*.loader {
-    border: 3px solid var(--dark);
-    border-top-color: var(--darkerMain);
-    border-bottom-color: var(--darkerMain);
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    animation: spin 1s linear infinite;
-    position: absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}*/
 
 .start {
   text-align: start;
@@ -195,57 +154,6 @@ mark {
 
 .spacer {
   flex: 1 1 auto;
-}
-
-pre {
-  // padding: 5px;
-  &>.string {
-    color: green;
-  }
-  &>.number {
-    color: darkorange;
-  }
-  &>.boolean {
-    color: blue;
-  }
-  &>.null {
-    color: magenta;
-  }
-  &>.key {
-    color: red;
-  }
-}
-
-.table-actions {
-  margin-bottom: 2rem;
-  td {
-    &.shrink {
-      width: 25%;
-    }
-    &.expand {
-      width: 50%;
-    }
-  } // display: flex;
-  // align-items: flex-end;
-  // margin-bottom: $gutterSize/2;
-  // form {
-  //   .mat-input-wrapper {
-  //     margin-bottom: 14px !important;
-  //   }
-  // }
-}
-
-
-
-app-error-panel,
-app-success-panel {
-  z-index: 10;
-  width: 50rem;
-  max-width: 90%;
-  position: fixed;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
 }
 
 .pointer{

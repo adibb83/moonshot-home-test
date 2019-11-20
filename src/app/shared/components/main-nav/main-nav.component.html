@@ -1,22 +1,30 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="'dialog'"
-      [mode]="'side'"
-      [opened]="true">
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a routerLink="/campaign-creator" routerLinkActive="active">Create Campaign</a>
-      <a routerLink="/campaign-manager" routerLinkActive="active">Campaigns</a>
-      <a routerLink="/authentication" routerLinkActive="active" (click)="logOut()">Loguot</a>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport 
+  [attr.role]="'dialog'" [mode]="'side'" [opened]="showSideNav">
+    <mat-nav-list class="menu-items-layout">
+      <div>
+        <a routerLink="/campaign-creator/campaign-stepper" 
+        routerLinkActive="active">
+          <span>
+            <mat-icon>add</mat-icon>  Create Campaign
+          </span> </a>
+        <a routerLink="/campaign-manager/campaigns-dataGrid" 
+        routerLinkActive="active" >
+          <span>
+            <mat-icon>audiotrack</mat-icon>  Campaigns
+          </span></a>
+      </div>
+      <a routerLink="/authentication" 
+      routerLinkActive="active" (click)="logOut()">
+        <span>
+          <mat-icon>power_settings_new</mat-icon>  Loguot
+        </span></a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="page-wrap img-bg">
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()">
+      <button *ngIf="showSideNav" type="button" aria-label="Toggle sidenav" 
+      mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Moon Shot</span>
@@ -26,4 +34,3 @@
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
-

@@ -18,13 +18,6 @@ import { ProgressSpinnerComponent} from '@shared/components/helpers/progress-spi
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { MainNavComponent } from '@shared/components/main-nav/main-nav.component';
 
-// pipes
-
-import { ExtractModelErrorsPipe } from './pipes/extract-model-errors.pipe';
-
-// temp imported for prod build tests
-import { ConfirmDialogComponent } from '@shared/components/helpers/confirm-dialog/confirm-dialog.component';
-
 // services
 import { CampaignService } from '@services/campaign.service';
 import { AccountService } from '@services/account.service';
@@ -38,9 +31,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule} from '@angular/fire/auth';
-import { from } from 'rxjs';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-
 
 
 @NgModule({
@@ -49,7 +39,6 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     NotFoundComponent,
     ProgressSpinnerComponent,
     MainNavComponent,
-    ConfirmDialogComponent,
     SnackBarComponentComponent,
   ],
   imports: [
@@ -85,6 +74,3 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 })
 export class AppModule {}
 
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-// }

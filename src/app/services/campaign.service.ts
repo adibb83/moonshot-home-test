@@ -1,9 +1,11 @@
 import { Injectable, SkipSelf, Optional } from '@angular/core';
 import { CampaignModel, SegmentModel } from '@models/campaign.model';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as _ from 'lodash';
 import { GlobalAppService } from '@services/global-app.service';
+import { ProgressDialogService } from '@services/progress-dialog.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class CampaignService {
   private campaingsCollection$: AngularFirestoreCollection<CampaignModel>;
   private updateCampaignDoc: AngularFirestoreDocument<CampaignModel>;
   public currentCampain: CampaignModel;
-
+  error: any | null;
   public allCampaings$: Observable<CampaignModel[]>;
 
   public sagmentsList: SegmentModel[] = [
@@ -23,21 +25,40 @@ export class CampaignService {
 
   constructor(
     private _angularFirestore: AngularFirestore,
-    public _globalAppService: GlobalAppService) {
+    public  _globalAppService: GlobalAppService,
+    public _progressDialogService: ProgressDialogService) {
+    this.initCampaigns();
+  }
+
+  initCampaigns() {
     this.campaingsCollection$ = this._angularFirestore.collection<CampaignModel>('campaigns');
     this.allCampaings$ = this.campaingsCollection$.valueChanges();
   }
 
-  addCampaign(campaign: CampaignModel) {
-    const id = this._angularFirestore.createId();
-    campaign.id = id;
-    this.campaingsCollection$.add(campaign);
-    this._globalAppService.openSnackBar(`Campagin saved. Id: ${id}`);
+  public async addCampaign(campaign: CampaignModel) {
+    try {
+      this._progressDialogService.loading(true);
+      const id: string = this._angularFirestore.createId();
+      campaign.id = id;
+      await this.campaingsCollection$.add(campaign);
+      this._globalAppService.openSnackBar(`Campagin saved. Id: ${id}`);
+      this._progressDialogService.loading(false);
+    } catch (err) {
+      this.handleError(err);
+    }
   }
 
-  updateCampaign(campaign: CampaignModel) {
-    this.updateCampaignDoc = this._angularFirestore.doc<CampaignModel>(campaign.id);
-    this.updateCampaignDoc.update(campaign);
+
+  public async updateCampaign(campaign: CampaignModel) {
+    try {
+      this._progressDialogService.loading(true);
+      this.updateCampaignDoc = this._angularFirestore.collection('campaigns').doc(campaign.id);
+      await this.updateCampaignDoc.set(campaign, { merge: true });
+      this._globalAppService.openSnackBar(`Campagin Updated`);
+      this._progressDialogService.loading(false);
+    } catch (err) {
+      this.handleError(err);
+    }
   }
 
   saveCampaign(campaign: CampaignModel) {
@@ -55,4 +76,32 @@ export class CampaignService {
   restartCurrentCampaign() {
     this.currentCampain = {} as CampaignModel;
   }
+
+  handleError(error: any) {
+    this._progressDialogService.loading(false);
+    this._globalAppService.openSnackBar(`oops an error occurred console logged`);
+    console.error(error);
+  }
+
+
 }
+
+
+
+
+  // addCampaign(campaign: CampaignModel) {
+  //   this.error = null;
+  //   console.log(campaign);
+  //   const id = this._angularFirestore.createId();
+  //   campaign.id = id;
+  //   this.campaingsCollection$.add(campaign)
+  //   .catch(error => {console.log(error); this.handleError(error); this.error = error; });
+  //   if (this.error === null) {this._globalAppService.openSnackBar(`Campagin saved. Id: ${id}`); }
+  // }
+
+  // updateCampaign(campaign: CampaignModel) {
+  //   this.error = null;
+  //   this.updateCampaignDoc = this._angularFirestore.doc<CampaignModel>(campaign.id);
+  //   this.updateCampaignDoc.update(campaign).catch(error => { this.handleError(error); this.error = error; });
+  //   if (this.error === null) { this._globalAppService.openSnackBar(`Campagin Updated`); }
+  // }

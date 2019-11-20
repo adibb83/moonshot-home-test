@@ -25,6 +25,7 @@ export class CampaignsDataGridComponent implements OnInit {
       'bid',
       'actions'
     ];
+
   public term$ = new BehaviorSubject<string>('');
   public selectedInput: string | null = '';
 
@@ -93,12 +94,12 @@ export class CampaignsDataGridComponent implements OnInit {
 
   editCampaign(row: CampaignModel) {
     this._campaignService.currentCampain = row;
-    this._router.navigate(['campaign-creator']);
+    this._router.navigate(['campaign-creator', 'campaign-stepper']);
   }
 
   createNewCampaign() {
     this._campaignService.restartCurrentCampaign();
-    this._router.navigate(['campaign-creator']);
+    this._router.navigate(['campaign-creator', 'campaign-stepper']);
   }
 
 }

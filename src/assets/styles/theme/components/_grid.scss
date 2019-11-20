@@ -1,3 +1,7 @@
+.mat-row{
+    background-color:$foreground;
+}
+
 .mat-row.highlighted {
     background: lightblue;
   }
@@ -5,8 +9,9 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    min-width: 500px;
   }
+
+  
    
   .mat-header-cell, .mat-sort-header {
     font-weight: 600;
@@ -38,4 +43,8 @@
              color:$primary
          }
    }
+  }
+
+  .cel-color{
+    color:$primary
   }

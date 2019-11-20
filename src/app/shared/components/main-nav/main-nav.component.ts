@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { GlobalAppService } from '@services/global-app.service';
 import { LogOutService } from '@services/log-out.service';
 import { AuthTokenService } from '@services/auth-token.service';
@@ -13,12 +11,6 @@ import { AuthTokenService } from '@services/auth-token.service';
 })
 export class MainNavComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
   constructor(
     private breakpointObserver: BreakpointObserver,
     public _globalAppService: GlobalAppService,
@@ -29,4 +21,10 @@ export class MainNavComponent {
     logOut() {
       this._logOutService.logOut();
     }
+
+    get showSideNav(): boolean {
+      return this._authTokenService.isAuthenticated();
+    }
 }
+
+

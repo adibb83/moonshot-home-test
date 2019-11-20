@@ -6,6 +6,7 @@
   @include display-grid;
   @include grid-repeat(2, 3);
   padding: $block-line-lg-height;
+  border-radius: 10px;
 }
 
 .loginHeader {
@@ -13,9 +14,10 @@
   grid-column: 2;
   display: flex;
   flex-flow: column;
+  @include flex-order(center, center);
 
-  .error{
-      color:red;
+  .error {
+    color: red;
   }
 }
 
@@ -25,16 +27,20 @@
   @include display-grid;
   @include grid-repeat(5, 0);
   justify-items: center;
+  align-items: center;
   gap: 3rem;
   border: solid 5px $border-color;
   padding: $block-line-lg-height;
 
   button {
     width: 100%;
-    margin: 1rem;
+    margin: 1rem auto;
   }
 
-  .button-row{
-      width: 100%;
+  .divider,
+  .button-row {
+    width: 100%;
+    border-top-color: $border-color !important;
   }
+
 }

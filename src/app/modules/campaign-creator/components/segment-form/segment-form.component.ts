@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Validators, NG_VALIDATORS, FormControl, FormArray } from '@angular/forms';
+import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, NG_VALIDATORS} from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { SegmentModel } from '@models/campaign.model';
@@ -26,7 +26,7 @@ import * as _ from 'lodash';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
+export class SegmentFormComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
   form: FormGroup;
   subscriptions: Subscription[] = [];
   devices: SegmentModel[];
@@ -68,8 +68,14 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
     this.form = this.formBuilder.group({
       segment: [this.selectedDevices, [validateRequired]]
     });
+  }
+
+
+  ngAfterViewInit() {
     if (this._campaignService.currentCampain && !_.isEmpty(this._campaignService.currentCampain.id)) {
       this.form.controls.segment.setValue(this._campaignService.currentCampain.segments);
+      this.selectedDevices = this._campaignService.currentCampain.segments;
+      console.log(this.form.controls.segment);
     } else {
       this.form.controls.segment.setValue(this.selectedDevices);
     }
@@ -84,7 +90,6 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
     );
 
   }
-
 
   selectDataInit() {
     this.devices = this._campaignService.sagmentsList;
@@ -101,7 +106,6 @@ export class SegmentFormComponent implements ControlValueAccessor, OnDestroy {
     }
     this.deviceInput.nativeElement.value = '';
   }
-
 
   remove(device, indx): void {
     this.selectedDevices.splice(indx, 1);

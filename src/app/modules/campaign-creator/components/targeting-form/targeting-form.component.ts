@@ -1,14 +1,14 @@
 import { Component, forwardRef, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Validators, NG_VALIDATORS, FormControl } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Validators, NG_VALIDATORS } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { TargetingModel } from '@models/campaign.model';
 import * as _moment from 'moment';
-import {default as _rollupMoment, Moment} from 'moment';
-import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { default as _rollupMoment} from 'moment';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { multiplicationInputsValidator, CrossFieldErrorMatcher } from '@shared/validators/validators';
 import { CampaignService } from '@services/campaign.service';
 import * as _ from 'lodash';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 const moment = _rollupMoment || _moment;
 
@@ -18,9 +18,11 @@ export const MY_FORMATS = {
   },
   display: {
     dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
   },
 };
-
 
 @Component({
   selector: 'app-targeting-form',
@@ -37,7 +39,8 @@ export const MY_FORMATS = {
       useExisting: forwardRef(() => TargetingFormComponent),
       multi: true,
     },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { strict: true } },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -46,6 +49,7 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
   form: FormGroup;
   subscriptions: Subscription[] = [];
   errorMatcher = new CrossFieldErrorMatcher();
+  minDate: Date = new Date();
 
   get value(): TargetingModel {
     return this.form.value;
@@ -101,8 +105,13 @@ export class TargetingFormComponent implements ControlValueAccessor, OnDestroy {
       this.form.controls.startDate.setValue(
         moment.unix(this._campaignService.currentCampain.targeting.startDate[firebseTimestampKey]));
       this.form.controls.endDate.setValue(
-       moment.unix(this._campaignService.currentCampain.targeting.endDate[firebseTimestampKey]));
+        moment.unix(this._campaignService.currentCampain.targeting.endDate[firebseTimestampKey]));
     }
+  }
+
+  startDateInputEvent(event) {
+    console.log(event);
+    this.minDate = moment(event.value).toDate();
   }
 
   ngOnDestroy() {

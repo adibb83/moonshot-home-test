@@ -10,8 +10,10 @@
         <input placeholder="Devices" #deviceInput [formControl]="segmentFormControls" [matAutocomplete]="auto"
           [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
           [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="selected($event)">
-        <mat-icon class="moon" matSuffix (click)="openAutocomplite()" style="font-size: 35px !important; float: right !important;">keyboard_arrow_down</mat-icon>
-        <mat-error *ngIf="segmentFormControls.touched && segmentFormControls.hasError('required')">Select a device
+        <mat-icon class="moon" matSuffix (click)="openAutocomplite()"
+          style="font-size: 35px !important; float: right !important;">keyboard_arrow_down</mat-icon>
+        <mat-error 
+        *ngIf="segmentFormControls.touched && segmentFormControls.hasError('required')">Select a device
         </mat-error>
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">

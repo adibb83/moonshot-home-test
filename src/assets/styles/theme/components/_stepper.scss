@@ -6,7 +6,7 @@ $state-number-invalid:#7bb6d8;
 
 
 .mat-stepper-horizontal {
-  background-color: $background !important;
+  background-color: $foreground !important;
 }
 
 .mat-horizontal-content-container {
@@ -17,7 +17,7 @@ $state-number-invalid:#7bb6d8;
 
 .mat-horizontal-stepper-header-container {
   position: relative;
-  background-color: $background;
+  background-color: $foreground;
   min-height: 10rem !important;
 
   .mat-horizontal-stepper-header {
@@ -46,7 +46,7 @@ $state-number-invalid:#7bb6d8;
 
   .mat-stepper-horizontal-line {
     position: absolute;
-    top: 65%;
+    top: 62%;
     width: 100%;
     border-color: $state-number-color;
     background-position: left !important;

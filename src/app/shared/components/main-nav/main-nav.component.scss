@@ -1,12 +1,17 @@
 @import '../../../../assets/styles/main/mixins';
 @import '../../../../assets/styles/theme/palettes';
-
+@import '../../../../assets/styles/main/variables';
 
 
 
 mat-sidenav {
   width: 20rem;
-  background-color: rgb(255, 187, 0);
+  background-color: rgba(16, 16, 51, 0.89);
+  color: white;
+}
+
+.active {
+  color: $primary;
 }
 
 .sidenav-container {
@@ -26,24 +31,22 @@ mat-sidenav {
 .page-wrap {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; // same height as browser window height
+  min-height: 100vh; 
 }
 
 .content {
-  flex: 1; // child will set to an equal size inside the container
+  flex: 1; 
   padding: 2rem;
+  background-color: $background;
 }
-/*
- * Make the component injected by <router-outlet> full height:
- */
+
+
 
 main {
   display: flex;
   flex-direction: column;
 
-  // Select all direct descendants only of the <main> element
-  // that are not <router-outlet> elements:
-  > *:not(router-outlet) {
+  >*:not(router-outlet) {
 
     flex: 1; // child will set to an equal size inside the container
     display: block;
@@ -51,11 +54,24 @@ main {
   }
 }
 
-.menu-items-layout{
-  padding: 0 16px;
-  @include flex-flow(row);
-  @include flex-order(center,center);
-  @include flex-self(space-between, auto)
+.menu-items-layout {
+  height: calc(100% - 5rem);
+  padding: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  @include flex-flow(column);
+  @include flex-order(center, baseline);
+
+  @include flex-self(space-between, auto);
+
+  div {
+    @include flex-flow(column);
+    @include flex-order(center, baseline);
+    @include flex-self(space-between, auto);
+
+    a {
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+  }
 }
-
-

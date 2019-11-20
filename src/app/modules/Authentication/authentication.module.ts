@@ -7,6 +7,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
 // material use
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider';
 
 // forms modules
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ]
 })
 export class AuthenticationModule { }

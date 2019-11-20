@@ -1,18 +1,18 @@
 <div class="loginLayout">
-  <div class="loginHeader">
+  <div class="header loginHeader">
     <h3>Login</h3>
     <p *ngIf="error" class="error" >{{error.message}}</p>
   </div>
   <div class="formLayout">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput type="email" placeholder="Email" formControlName="email" required>
         <mat-error *ngIf="loginFormControls.email.invalid && 
       (loginFormControls.email.dirty || loginFormControls.email.touched)">
           {{getEmailError()}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password" required>
         <mat-error *ngIf="loginFormControls.password.invalid && 
       (loginFormControls.password.dirty || loginFormControls.password.touched)">
@@ -21,9 +21,7 @@
 
       <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
-    <div>
-      <span>OR</span>
-    </div>
+    <span>OR</span>
     <div class="button-row">
       <button mat-raised-button color="primary" (click)="loginWithGoogle()">Login With Google</button>
     </div>

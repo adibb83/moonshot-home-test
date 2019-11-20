@@ -21,9 +21,8 @@ import { SegmentFormComponent } from './components/segment-form/segment-form.com
 import { SummeryComponent } from './components/summery/summery.component';
 import { MatNativeDateModule, MatIconModule, MatSelectModule } from '@angular/material';
 
-// helpers
-import { ErrorPanelComponent } from '@shared/components/helpers/error-panel/error-panel.component';
-import { ExtractModelErrorsPipe } from '../../pipes/extract-model-errors.pipe';
+// services
+
 import { AuthGuard } from '@services/auth-guard.service';
 import { AuthTokenService } from '@services/auth-token.service';
 import { MomentDateModule } from '@angular/material-moment-adapter';
@@ -35,8 +34,6 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     TargetingFormComponent,
     SegmentFormComponent,
     SummeryComponent,
-    ErrorPanelComponent,
-    ExtractModelErrorsPipe,
     ],
   imports: [
     CommonModule,
@@ -55,7 +52,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     MatSelectModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MomentDateModule
+    MomentDateModule,
   ],
   providers: [AuthTokenService , AuthGuard]
 })

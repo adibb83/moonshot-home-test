@@ -2,9 +2,11 @@
 <div class="targetingLayout">
 <div [formGroup]="form" class="formLayout">
   <mat-form-field>
-    <input matInput placeholder="Campaign Name" type="text" formControlName="name" required>
+    <input matInput placeholder="Campaign Name" 
+    type="text" formControlName="name" required>
     <mat-error
-      *ngIf="targetingFormControls.name.invalid && (targetingFormControls.name.dirty || targetingFormControls.name.touched)">
+      *ngIf="targetingFormControls.name.invalid && 
+      (targetingFormControls.name.dirty || targetingFormControls.name.touched)">
       Campaign name required</mat-error>
   </mat-form-field>
 
@@ -16,7 +18,6 @@
      && (targetingFormControls.budget.dirty 
      || targetingFormControls.budget.touched)">
      Budget is required</mat-error>
-      
   </mat-form-field>
 
   <mat-form-field>
@@ -30,7 +31,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Start Date" [matDatepicker]="startPicker" formControlName="startDate" required>
+    <input matInput placeholder="Start Date" [matDatepicker]="startPicker" 
+    (dateInput)="startDateInputEvent($event)" formControlName="startDate" required>
     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
     <mat-datepicker #startPicker></mat-datepicker>
     <mat-error *ngIf="targetingFormControls.startDate.invalid
@@ -40,8 +42,9 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="End Date" [matDatepicker]="endPicker" formControlName="endDate" required>
-    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <input matInput placeholder="End Date" [min]="minDate"
+     [matDatepicker]="endPicker" formControlName="endDate" required>
+    <mat-datepicker-toggle matSuffix  [for]="endPicker"></mat-datepicker-toggle>
     <mat-datepicker #endPicker></mat-datepicker>
     <mat-error *ngIf="targetingFormControls.endDate.invalid
      && (targetingFormControls.endDate.dirty 

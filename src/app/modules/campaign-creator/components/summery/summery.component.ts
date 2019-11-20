@@ -8,11 +8,7 @@ import { CampaignModel } from '@models/campaign.model';
   styleUrls: ['./summery.component.scss']
 })
 
-export class SummeryComponent implements OnInit {
+export class SummeryComponent {
   @Input() data: CampaignModel;
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

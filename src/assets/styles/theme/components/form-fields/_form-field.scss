@@ -1,7 +1,9 @@
 .mat-form-field {
     font-weight: mat-font-weight($moonshot-typography, body-1);
     width: 100% !important;
-    margin: 1rem;
+    margin: 1rem 0;
+    box-sizing: border-box;
+    color:black;
   }
 
   .mat-form-field-flex {
@@ -48,8 +50,11 @@
   }
   
   .mat-form-field-placeholder {
-    // color: currentColor;
     top: 5rem;
+  }
+
+  .mat-form-field-labe{
+    top:1rem !important;
   }
   
   .mat-form-field-wrapper {
@@ -101,68 +106,8 @@
   .mat-form-field-suffix {
     align-items: center;
     display: flex;
-  } // SELECT
-  ////////////////////////////
-  .mat-select {
-    display: flex !important;
-    align-items: center;
-  }
-  
-  .mat-select-value {
-    color: currentColor !important;
-  }
-  
-  .mat-select-arrow {
-    color: currentColor !important;
-  }
-  
-  .mat-option-text {
-    unicode-bidi: plaintext;
-  }
-  
-  .mat-select-value-text {
-    @include mat-typography-level-to-styles($moonshot-typography, body-2);
-  }
-  
-  .mat-select-panel {
-    @include border-radius(5px);
-    border: 1px solid $border-color;
-  }
-  
-  .mat-select-disabled {
-    .mat-select-value,
-    .mat-select-arrow,
-    +.mat-form-field-placeholder-wrapper .mat-form-field-placeholder {
-      color: $pale !important;
-    }
-  }
-  
-  .mat-select-panel .mat-option {
-    &.mat-selected,
-    &.mat-active {
-      &:not(.mat-option-multiple) {
-        background-color: inherit;
-      }
-      &:focus,
-      &:hover {
-        background-color: $hover;
-      }
-    }
-  }
-  
-  .mat-option {
-    @include mat-typography-level-to-styles($moonshot-typography, body-1);
-    padding: $block-line-md-padding;
-    line-height: $block-line-md-height;
-    height: $block-line-md-height;
-  }
-  
-  .mat-select-panel .mat-optgroup-label,
-  .mat-select-panel .mat-option {
-    line-height: $block-line-md-height;
-    height: $block-line-md-height;
-  }
-  
+  } 
+
   .mat-hint {
     color: $pale;
   }
@@ -178,16 +123,6 @@
 
   .mat-chip-list-wrapper{
     display: block !important;
-  }
-  
-  .mat-checkbox-frame {
-    border-width: 1px !important;
-    border-radius: 3px !important;
-    border-color: $border-color;
-  }
-  
-  .mat-checkbox-layout {
-    white-space: initial !important;
   }
   
   .mat-form-field[pristine] {
